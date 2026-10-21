@@ -1,7 +1,7 @@
 import streamlit as st
 
-# Bring in the two backend functions: one loads the CSV, the other scores roles.
-from backend.matching import load_role_skills, match_roles
+# Bring in the backend functions: two load the CSVs, the other scores roles.
+from backend.matching import load_role_skills, load_trend_signals, match_roles
 
 st.set_page_config(
     page_title="FuturePath AI",
@@ -39,23 +39,33 @@ if st.button("Find My Future Careers"):
 
     # Otherwise, score every role and show the results.
     else:
+        # Load the job market numbers from data/trend_signals.csv.
+        trend_signals = load_trend_signals()
+
         # Rank all roles against the user's selected skills (best match first).
-        results = match_roles(skills, role_skills)
+        results = match_roles(skills, role_skills, trend_signals)
 
         st.subheader("Your Career Matches")
 
         # Show each role one by one.
         for r in results:
-            # Role name with the score shown as a percentage, e.g. 0.667 -> 67%.
-            st.markdown(f"**{r['role']}** — {r['score']:.0%} match")
+            # Role name with its match percentage, e.g. "Data Analyst — 71% match".
+            st.markdown(f"**{r['role']}** — {r['match_pct']:.0f}% match")
 
-            # A progress bar that fills up to the score (0 to 1).
-            st.progress(r["score"])
+            # A progress bar. st.progress wants 0 to 1, so divide the percentage by 100.
+            st.progress(r["match_pct"] / 100)
 
             # List the skills the user already has for this role, if any.
-            if r["matched"]:
-                st.write("✅ You have: " + ", ".join(r["matched"]))
+            if r["matched_skills"]:
+                st.write("✅ You have: " + ", ".join(r["matched_skills"]))
 
             # List the skills the user still needs to learn, if any.
-            if r["missing"]:
-                st.write("📚 To learn: " + ", ".join(r["missing"]))
+            if r["missing_skills"]:
+                st.write("📚 To learn: " + ", ".join(r["missing_skills"]))
+
+            # Show the job market count only if we have one for this role (0 is a real value, so check for None).
+            if r["market_listing_count"] is not None:
+                st.caption(
+                    f"💼 {r['market_listing_count']} remote listings found "
+                    f"(as of {r['retrieved_at']}) · [source]({r['market_source_url']})"
+                )
