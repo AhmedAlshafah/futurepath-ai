@@ -1,7 +1,7 @@
 role,skill,weight,source_url,verified_date
 Data Analyst, SQL;Microsoft Power BI;Python;Tableau;Microsoft Excel, 2, https://www.onetonline.org/link/demand/15-2051.01, 2026-10-21
 Data Scientist, Python;SQL;R;Tableau;TensorFlow;PyTorch, 3, https://www.onetonline.org/link/demand/15-2051.00, 2026-10-21
-Machine Learning Engineer, Python;Evaluation/ evals;Agents;LLMs;PyTorch;Inference optimazation;Published research;MLOps, 3, https://aiopenroles.com/insights/how-to-become-a-machine-learning-engineer/, 2026-10-21      
+Machine Learning Engineer, Python;PyTorch;MLOps;TensorFlow;Docker;Kurbenetes, 3, https://aiopenroles.com/insights/how-to-become-a-machine-learning-engineer/, 2026-10-21      
 Cybersecurity Analyst, Linux;Python;Splunk Enterprise;Firewall software;Wireshark, 1, https://www.onetonline.org/link/demand/15-1212.00, 2026-10-21
 Cloud Engineer, Linux; Microsoft Azure;Powershell;Pyton;Amazon Web Services;Docker, 1, https://www.onetonline.org/link/hot_tech/15-1244.00, 2026-10-21
 Software Developer, Python;Amazon Web Services;Java;SQL;JavaScript;Git, 2, https://www.onetonline.org/link/hot_tech/15-1252.00, 2026-10-12
