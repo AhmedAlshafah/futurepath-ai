@@ -40,4 +40,40 @@ Description: Machine Learning Engineers build an deploy machine learning systems
 Sources: AI Open Roles' analysis of 827 Machine Learning Engineer postings and Anduril's Machine Learning Engineer job descriptiuon. The Docker and Kurbenetes wights are provisional because the job description confirms them, but the posting analysis doesn't give a percentage for them. These Machine Learning Engineer findings are more role-specific than using the Data Scientist profile alone.
 
 ##Cybersecurity Analyst
-Description
+Description: Information security analysts protect computer systems and networks by assessing risks, applying scurity measures, and monitoring for threads.\
+
+| Skill | Suggested weight | Evidence |
+| Firewall software | 2 | Mentioned in 18% of postings |
+| Linux | 2 | 14% |
+| Splunk Enterprise | 2 | 12% |
+| Python | 2 | 12% |
+| Micrsoft Azure | 2 | 12% |
+| Amazon Web Services | 11% |
+
+Source: O*NET In-Demand Technology Skills: Information Security Analysts
+
+##Cloud Engineer
+Description: O*NET's Network and Computer Systems Administrator occupation is a proxy for Cloud Engineer. Its tasks include maintaining operating systems and virtual servers, monitoring systems, and controlling access.
+
+| Skill | Suggested weight | Evidence |
+| Linux | 3 | Mentioned in 23% of postings |
+| Microsoft Azure | 2 | 13% |
+| Powershell | 2 | 12% |
+| Python | 2 | 11% |
+| Amazon web Services | 2 | 10% |
+| Docker | 1 | 4% |
+
+Source: O*NET Hot Technologies: Network and computer Systems Administrators. Because this is a proxy occupation, these are candidate skills; Cloud Engineer postings may differ
+
+##Software Developer
+Description: Software developers analyze user needs, design anmd build software, and update or maintain applicaitons.
+
+| Skill | Suggested weight | Evidence |
+| Python | 3 | Mentioned in 29% of postings |
+| Amazon Web Services | 3 | 26% |
+| Java | 3 | 25% |
+| SQL | 3 | 24% |
+| JavaScript | 3 | 20% |
+| Git | 2 | 14% |
+
+Source: O*NET Hot Technologies: Software Developers. The O*NET posting percentages are U.S.-based and reflct 2025 postings; the skills are evidence-backend examples, not requirements for every job. The Machine Learning Engineer and Cloud Engineer mappings are proxies.
