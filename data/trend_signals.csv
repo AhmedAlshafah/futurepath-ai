@@ -1,1 +1,7 @@
 role,region,period,metric,value,source_url,retrieved_at
+Data Analyst,himalayas_worldwide,2026-10-21,title_matched_unique_remote_listings,12,https://himalayas.app/jobs/api/search?q=data+analyst&worldwide=true&sort=recent,2026-10-21
+Data Scientist,himalayas_worldwide,2026-10-21,title_matched_unique_remote_listings,21,https://himalayas.app/jobs/api/search?q=data+scientist&worldwide=true&sort=recent,2026-10-21
+Machine Learning Engineer,himalayas_worldwide,2026-10-21,title_matched_unique_remote_listings,25,https://himalayas.app/jobs/api/search?q=machine+learning+engineer&worldwide=true&sort=recent,2026-10-21
+Cybersecurity Analyst,himalayas_worldwide,2026-10-21,title_matched_unique_remote_listings,0,https://himalayas.app/jobs/api/search?q=cybersecurity+analyst&worldwide=true&sort=recent,2026-10-21
+Cloud Engineer,himalayas_worldwide,2026-10-21,title_matched_unique_remote_listings,4,https://himalayas.app/jobs/api/search?q=cloud+engineer&worldwide=true&sort=recent,2026-10-21
+Software Developer,himalayas_worldwide,2026-10-21,title_matched_unique_remote_listings,10,https://himalayas.app/jobs/api/search?q=software+developer&worldwide=true&sort=recent,2026-10-21
