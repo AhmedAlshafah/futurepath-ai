@@ -65,7 +65,11 @@ if st.button("Find My Future Careers"):
 
             # Show the job market count only if we have one for this role (0 is a real value, so check for None).
             if r["market_listing_count"] is not None:
+                # The stored source is the Himalayas API link, which shows raw JSON text in a browser.
+                # Dropping "/api/search" turns it into the normal search page with readable job listings.
+                jobs_url = (r["market_source_url"] or "").replace("/jobs/api/search", "/jobs")
+
                 st.caption(
                     f"💼 {r['market_listing_count']} remote listings found "
-                    f"(as of {r['retrieved_at']}) · [source]({r['market_source_url']})"
+                    f"(as of {r['retrieved_at']}) · [view jobs]({jobs_url})"
                 )
