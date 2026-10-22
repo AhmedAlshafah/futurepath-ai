@@ -1,1 +1,42 @@
 role,skill,weight,source_url,verified_date
+Data Analyst, SQL, 3, https://www.onetonline.org/link/demand/15-2051.01; https://hrdcorp.gov.my/wp-content/uploads/2021/03/1_2020_INDUSTRY-TRAINING-INTELLIGENCE-REPORT.pdf, 2026-10-21
+Data Analyst, Python, 2, https://www.onetonline.org/link/demand/15-2051.01; https://hrdcorp.gov.my/wp-content/uploads/2021/03/1_2020_INDUSTRY-TRAINING-INTELLIGENCE-REPORT.pdf, 2026-10-21
+Data Analyst, Microsoft Power BI, 2, https://www.onetonline.org/link/demand/15-2051.01; https://hrdcorp.gov.my/wp-content/uploads/2021/03/1_2020_INDUSTRY-TRAINING-INTELLIGENCE-REPORT.pdf, 2026-10-21
+Data Analyst, Tableau, 2, https://www.onetonline.org/link/demand/15-2051.01; https://hrdcorp.gov.my/wp-content/uploads/2021/03/1_2020_INDUSTRY-TRAINING-INTELLIGENCE-REPORT.pdf, 2026-10-22
+Data Analyst, Microsoft Excel, 2, https://www.onetonline.org/link/demand/15-2051.01; https://hrdcorp.gov.my/wp-content/uploads/2021/03/1_2020_INDUSTRY-TRAINING-INTELLIGENCE-REPORT.pdf, 2026-10-22
+Data Analyst, R, 1, https://www.onetonline.org/link/demand/15-2051.01, 2026-10-21
+
+Data Scientist, Python, 3, https://www.onetonline.org/link/demand/15-2051.00; https://www.ibm.com/think/topics/data-engineer-data-vs-data-scientist-vs-analytics-engineer, 2026-10-21
+Data Scientist, SQL, 3, https://www.onetonline.org/link/demand/15-2051.00; https://www.ibm.com/think/topics/data-engineer-data-vs-data-scientist-vs-analytics-engineer, 2026-10-21
+Data Scientist, R, 2, https://www.onetonline.org/link/demand/15-2051.00; https://www.ibm.com/think/topics/data-engineer-data-vs-data-scientist-vs-analytics-engineer, 2026-10-21
+Data Scientist, Tensor Flow, 2, https://www.onetonline.org/link/demand/15-2051.00, 2026-10-22
+Data Scientist, PyTorch, 2, https://www.onetonline.org/link/demand/15-2051.00, 2026-10-22
+Data Scientist, Tableau, 1, https://www.onetonline.org/link/demand/15-2051.00, 2026-10-22
+
+Machine Learning Engineer, Python, 3, https://aiopenroles.com/insights/how-to-become-a-machine-learning-engineer/ ;https://job-boards.greenhouse.io/andurilindustries/jobs/5250787007?gh_jid=5250787007; https://jobs.twilio.com/careers/job/1099555992916?domain=twilio.com, 2026-10-21
+Machine Learning Engineer, PyTorch, 3, https://aiopenroles.com/insights/how-to-become-a-machine-learning-engineer/ ;https://job-boards.greenhouse.io/andurilindustries/jobs/5250787007?gh_jid=5250787007, 2026-10-21
+Machine Learning Engineer, MLOps, 3, https://aiopenroles.com/insights/how-to-become-a-machine-learning-engineer/ ;https://job-boards.greenhouse.io/andurilindustries/jobs/5250787007?gh_jid=5250787007; https://jobs.twilio.com/careers/job/1099555992916?domain=twilio.com, 2026-10-21
+Machine Learning Engineer, TensorFlow, 2, https://job-boards.greenhouse.io/andurilindustries/jobs/5250787007?gh_jid=5250787007 , 2026-10-22
+Machine Learning Engineer, Docker, 2, https://job-boards.greenhouse.io/andurilindustries/jobs/5250787007?gh_jid=5250787007; https://jobs.twilio.com/careers/job/1099555992916?domain=twilio.com, 2026-10-22
+Machine Learning Engineer, Kubernetes, 2, https://job-boards.greenhouse.io/andurilindustries/jobs/5250787007?gh_jid=5250787007 ; https://jobs.twilio.com/careers/job/1099555992916?domain=twilio.com, 2026-10-22
+
+Cybersecurity Analyst, Firewall Software, 3, https://www.onetonline.org/link/demand/15-1212.00; https://www.cisa.gov/careers/work-rolescyber-defense-analyst, 2026-10-21
+Cybersecurity Analyst, Linux, 2, https://www.onetonline.org/link/demand/15-1212.00, 2026-10-21
+Cybersecurity Analyst, Splunk Enterprise, 2, https://www.onetonline.org/link/demand/15-1212.00, 2026-10-21
+Cybersecurity Analyst, Python, 2, https://www.onetonline.org/link/demand/15-1212.00, 2026-10-22
+Cybersecurity Analyst, Microsoft Azure, 1, https://www.onetonline.org/link/demand/15-1212.00; , 2026-10-22       
+Cybersecurity Analyst, Amazon Web Services, 1, https://www.onetonline.org/link/demand/15-1212.00, 2026-10-22
+
+Cloud Engineer, Linux, 3, https://www.onetonline.org/link/demand/15-1244.00, 2026-10-21
+Cloud Engineer, Microsoft Azure, 2, https://www.onetonline.org/link/demand/15-1244.00; https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104, 2026-10-21
+Cloud Engineer, Powershell, 2, https://www.onetonline.org/link/demand/15-1244.00; https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104, 2026-10-21
+Cloud Engineer, Python, 2, https://www.onetonline.org/link/demand/15-1244.00, 2026-10-21
+Cloud Engineer, Amazon Web Services, 2, https://www.onetonline.org/link/demand/15-1244.00; https://docs.aws.amazon.com/de_de/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03.html, 2026-10-21  
+Cloud Engineer, Docker, 1, https://www.onetonline.org/link/demand/15-1244.00, 2026-10-22
+
+Software Engineer, Python, 3, https://www.onetonline.org/link/demand/15-1252.00; https://www.oracle.com/careers/software-engineer/, 2026-10-21
+Software Engineer, Java, 3, https://www.onetonline.org/link/demand/15-1252.00;https://www.oracle.com/careers/software-engineer/, 2026-10-21
+Software Engineer, SQL, 2, https://www.onetonline.org/link/demand/15-1252.00; https://www.oracle.com/careers/software-engineer/, 2026-10-21
+Software Engineer, JavaScript, 2, https://www.onetonline.org/link/demand/15-1252.00; https://www.oracle.com/careers/software-engineer/, 2026-10-21
+Software Engineer, Git, 2, https://www.onetonline.org/link/demand/15-1252.00; https://www.ibm.com/careers/blog/what-does-a-software-developer-do, 2026-10-21  
+Software Engineer, Docker, 1, https://www.onetonline.org/link/demand/15-1252.00, 2026-10-22
