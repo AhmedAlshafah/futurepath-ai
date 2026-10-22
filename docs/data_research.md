@@ -40,7 +40,7 @@ Description: Machine Learning Engineers build an deploy machine learning systems
 Sources: AI Open Roles' analysis of 827 Machine Learning Engineer postings and Anduril's Machine Learning Engineer job descriptiuon. The Docker and Kurbenetes wights are provisional because the job description confirms them, but the posting analysis doesn't give a percentage for them. These Machine Learning Engineer findings are more role-specific than using the Data Scientist profile alone.
 
 ##Cybersecurity Analyst
-Description: Information security analysts protect computer systems and networks by assessing risks, applying scurity measures, and monitoring for threads.\
+Description: Information security analysts protect computer systems and networks by assessing risks, applying scurity measures, and monitoring for threads.
 
 | Skill | Suggested weight | Evidence |
 | Firewall software | 2 | Mentioned in 18% of postings |
@@ -48,7 +48,7 @@ Description: Information security analysts protect computer systems and networks
 | Splunk Enterprise | 2 | 12% |
 | Python | 2 | 12% |
 | Micrsoft Azure | 2 | 12% |
-| Amazon Web Services | 11% |
+| Amazon Web Services | 2 | 11% |
 
 Source: O*NET In-Demand Technology Skills: Information Security Analysts
 
