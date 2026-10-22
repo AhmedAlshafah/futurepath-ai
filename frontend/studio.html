@@ -94,7 +94,7 @@
   <section id="page-matches" class="page-view space-y-8" hidden>
    <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow flex flex-col md:flex-row justify-between gap-4"><div><span class="text-xs font-mono text-accent-emerald font-bold uppercase tracking-wider">EXPLAINABLE MATCHING · PILOT</span><h1 class="font-serif text-3xl sm:text-4xl font-bold mt-1">Career Matches &amp; Skill Gap Matrix</h1><p id="benchmark-status-matches" class="text-sm text-ink-700 mt-1"></p></div><button data-go="page-reskilling" class="px-4 py-2 rounded-xl bg-accent-cobalt text-white font-mono text-xs font-bold self-start">Proceed to Reskilling Studio →</button></div>
    <div class="space-y-3"><div class="flex justify-between gap-2"><span class="font-mono text-xs font-bold uppercase">Top 3 Career Matches</span><span class="text-[10px] font-mono text-ink-500">SELECT A ROLE FOR GAP DETAIL</span></div><div id="matches-cards-stack" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></div>
-   <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow space-y-7"><div id="matches-role-header" class="space-y-4 pb-6 border-hairline-b"></div><div class="bg-parchment-50 p-4 rounded-xl border border-slate-200 space-y-2"><div class="font-mono text-xs font-bold">MATCH FORMULA</div><p class="text-xs text-ink-700 leading-relaxed">Score = Python-equivalent round-half-to-even of (the weights for selected benchmark skills ÷ the total weights for that role) × 100. A higher team-assigned weight contributes more to the score. Interests are shown as context but do not change this weighted skill score. Degree and self-assessed skill tiers are not scoring inputs. This is a comparison aid, not a probability of employment or verified readiness.</p><p id="match-order-note" class="text-[10px] text-ink-500"></p></div><div><div class="flex justify-between font-mono text-xs mb-3"><span class="font-bold uppercase">Skill-by-skill delta matrix</span><span id="matches-delta-count" class="text-[10px] text-accent-crimson font-bold"></span></div><div id="matches-matrix-table" class="space-y-2"></div></div><div class="bg-parchment-50 p-4 rounded-xl border border-slate-200 text-xs text-ink-700">SDG 4.4 and SDG 8.2 are broad project alignment badges only; no per-role SDG research mapping is asserted.</div></div>
+    <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow space-y-7"><div id="matches-role-header" class="space-y-4 pb-6 border-hairline-b"></div><div class="bg-parchment-50 p-4 rounded-xl border border-slate-200 space-y-2"><div class="font-mono text-xs font-bold">BACKEND MATCHING</div><p class="text-xs text-ink-700 leading-relaxed">Scores and role order come from the team's backend match_roles function. It matches normalized skills using the team-assigned weights and rounds the percentage to one decimal place. Interests, degree, and self-assessed skill tiers are not scored. This is a comparison aid, not a probability of employment or verified readiness.</p><p id="match-order-note" class="text-[10px] text-ink-500"></p></div><div><div class="flex justify-between font-mono text-xs mb-3"><span class="font-bold uppercase">Skill-by-skill delta matrix</span><span id="matches-delta-count" class="text-[10px] text-accent-crimson font-bold"></span></div><div id="matches-matrix-table" class="space-y-2"></div></div><div class="bg-parchment-50 p-4 rounded-xl border border-slate-200 text-xs text-ink-700">SDG 4.4 and SDG 8.2 are broad project alignment badges only; no per-role SDG research mapping is asserted.</div></div>
   </section>
   <section id="page-reskilling" class="page-view space-y-8" hidden>
    <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow flex flex-col md:flex-row justify-between gap-4"><div><span class="text-xs font-mono text-accent-cobalt font-bold uppercase tracking-wider">ACTIONABLE ROADMAP · REVIEWED CATALOG</span><h1 class="font-serif text-3xl sm:text-4xl font-bold mt-1">Personalized Reskilling Studio</h1><p class="text-sm text-ink-700 mt-1">Reviewed links are suggestions for gap skills, not endorsements or guarantees.</p></div><div class="flex gap-2"><button id="btn-export-reskill-md" class="px-3.5 py-2 rounded-xl bg-ink-900 text-white font-mono text-xs font-bold">Export syllabus (.md)</button><button id="btn-sync-cal-reskill" class="px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-ink-700 font-mono text-xs font-bold">Download .ics plan</button></div></div>
@@ -122,8 +122,9 @@
     "page-matches":["Career Matches & Skill Gap Matrix","Explainable matching & benchmark gap detail"],
     "page-reskilling":["Personalized Reskilling Studio","Reviewed learning links & suggested study pace"]
   };
-  const initial=DATA.personas.cs_student||{name:"Student Preview",degree:DATA.degrees[0],skills:[],interests:[]};
-  const state={page:"page-market",persona:"cs_student",name:initial.name,degree:initial.degree,skills:new Set(initial.skills.map(s=>s.toLowerCase())),interests:new Set(initial.interests),custom:[],tiers:{},selectedRole:null,runway:8,budget:"free",pace:"steady",completed:{},cvFound:[]};
+  const initial=DATA.profile||DATA.personas.cs_student||{name:"Student Preview",degree:DATA.degrees[0],skills:[],interests:[]};
+  const savedView=DATA.uiState||{};
+  const state={page:savedView.page||"page-market",persona:initial.persona||null,name:initial.name||"Student Preview",degree:initial.degree||DATA.degrees[0],skills:new Set((initial.skills||[]).map(s=>s.toLowerCase())),interests:new Set(initial.interests||[]),custom:initial.custom||[],tiers:initial.tiers||{},selectedRole:savedView.selectedRole||null,runway:savedView.runway||8,budget:savedView.budget||"free",pace:savedView.pace||"steady",completed:savedView.completed||{},cvFound:savedView.cvFound||[]};
   const $=id=>document.getElementById(id);
   const navPaths=[
     '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
@@ -141,17 +142,26 @@
   window.navigateToPage=navigate;
   function openDrawer(){$("app-sidebar").classList.add("drawer-open");$("drawer-shade").classList.add("visible");$("sidebar-open-btn").setAttribute("aria-expanded","true");$("sidebar-close-btn").focus()}
   function closeDrawer(){$("app-sidebar").classList.remove("drawer-open");$("drawer-shade").classList.remove("visible");$("sidebar-open-btn").setAttribute("aria-expanded","false")}
-  function roundPython(x){const lo=Math.floor(x),f=x-lo;return f<.5?lo:f>.5?lo+1:(lo%2===0?lo:lo+1)}
+  function scoreText(score){return `${Number(score).toFixed(1)}%`}
+  function publishProfile(){
+    window.parent.postMessage({type:"futurepath:state",value:{
+      profile:{name:state.name,degree:state.degree,skills:allSkills().filter(skill=>state.skills.has(skill.toLowerCase())).map(skill=>DATA.skillValues?.[skill]||skill),interests:[...state.interests],persona:state.persona,custom:state.custom,tiers:state.tiers},
+      uiState:{page:state.page,selectedRole:state.selectedRole,runway:state.runway,budget:state.budget,pace:state.pace,completed:state.completed,cvFound:state.cvFound}
+    }},"*");
+  }
   function rank(){
-    const matches=DATA.roles.map(role=>{const benchmark=DATA.benchmarks[role]||[];const weights=DATA.benchmarkWeights?.[role]||{};const have=benchmark.filter(s=>state.skills.has(s.toLowerCase()));const gaps=benchmark.filter(s=>!state.skills.has(s.toLowerCase()));const aligned=(DATA.roleInterests[role]||[]).some(i=>state.interests.has(i));const totalWeight=benchmark.reduce((sum,s)=>sum+Number(weights[s]??1),0);const earnedWeight=have.reduce((sum,s)=>sum+Number(weights[s]??1),0);const coverage=totalWeight?earnedWeight/totalWeight:0;const score=roundPython(coverage*100);return {role,benchmark,have,gaps,aligned,coverage,score,totalWeight,earnedWeight}});
-    const preset=state.persona && DATA.personas[state.persona];
-    const unchanged=preset && preset.skills.length===state.skills.size && preset.skills.every(x=>state.skills.has(x.toLowerCase())) && preset.interests.length===state.interests.size && preset.interests.every(x=>state.interests.has(x));
-    const back=unchanged&&DATA.backendOrder[state.persona];
-    matches.sort((a,b)=>back?(back.indexOf(a.role)<0?999:back.indexOf(a.role))-(back.indexOf(b.role)<0?999:back.indexOf(b.role))||b.score-a.score:b.score-a.score||a.role.localeCompare(b.role));
-    return {matches,usingBackend:!!back};
+    const matches=(DATA.backendMatches||[]).map(result=>{
+      const role=result.role;
+      const benchmark=DATA.benchmarks[role]||[];
+      const have=result.matched_skills||[];
+      const gaps=result.missing_skills||[];
+      const aligned=(DATA.roleInterests[role]||[]).some(i=>state.interests.has(i));
+      return {role,benchmark,have,gaps,aligned,score:Number(result.match_pct)};
+    });
+    return {matches,usingBackend:true};
   }
   function allSkills(){return [...new Set([...DATA.skills,...state.custom])].sort((a,b)=>a.localeCompare(b))}
-  function setSkill(skill,checked){const key=skill.toLowerCase();checked?state.skills.add(key):state.skills.delete(key);state.persona=null;render()}
+  function setSkill(skill,checked){const key=skill.toLowerCase();checked?state.skills.add(key):state.skills.delete(key);state.persona=null;publishProfile()}
   function createChip(skill){const b=make("button","skill-chip text-xs font-mono px-2.5 py-1 rounded-lg border border-slate-200 transition hover:border-slate-400");b.type="button";b.textContent=(state.skills.has(skill.toLowerCase())?"✓ ":"")+skill;b.setAttribute("aria-pressed",String(state.skills.has(skill.toLowerCase())));b.addEventListener("click",()=>setSkill(skill,!state.skills.has(skill.toLowerCase())));return b}
   function renderMarket(ranked){
     const cloud=$("fast-skills-cloud");cloud.replaceChildren();allSkills().slice(0,24).forEach(s=>cloud.appendChild(createChip(s)));
@@ -159,7 +169,9 @@
     const rows=DATA.roles.map(role=>{const r=DATA.trendRows.find(x=>x.role===role);return {role,value:r?Number(r.value):null}}).sort((a,b)=>(b.value??-1)-(a.value??-1));
     const max=Math.max(1,...rows.map(r=>r.value||0));
     rows.forEach(r=>{const row=make("div","space-y-1");const top=make("div","flex justify-between gap-3 text-xs");top.append(make("span","text-ink-900 font-medium",r.role),make("strong",r.value===0?"text-accent-amber":"text-accent-emerald",r.value===null?"—":`${r.value} listings`));const track=make("div","w-full bg-parchment-100 h-2 rounded-full overflow-hidden border border-slate-200");const bar=make("div",`h-full rounded-full ${r.value===0?"bg-amber-400":"bg-accent-cobalt"}`);bar.style.width=`${Math.max(r.value===0?0:4,((r.value||0)/max)*100)}%`;track.append(bar);row.append(top,track);bars.append(row)});
-    const top=ranked[0];const card=$("fast-fit-card");card.replaceChildren();const left=make("div","space-y-1");left.append(make("span","text-[10px] font-mono px-2 py-0.5 rounded bg-accent-cobaltLight text-accent-cobalt font-bold","TOP MATCH"),make("h3","font-serif text-xl sm:text-2xl font-bold",top.role),make("p","text-xs text-ink-500",`Matches ${top.have.length} of ${top.benchmark.length} listed role benchmark skills.`));const right=make("div","text-left sm:text-right shrink-0");right.append(make("div","font-mono text-3xl font-extrabold text-accent-cobalt",`${top.score}%`),make("span","text-[10px] font-mono text-ink-500","MATCH SCORE"));card.append(left,right);
+    const top=ranked[0];const card=$("fast-fit-card");card.replaceChildren();
+    if(!top){card.append(make("p","text-sm text-ink-700",DATA.matchError||"Backend match results are unavailable."))}
+    else {const left=make("div","space-y-1");left.append(make("span","text-[10px] font-mono px-2 py-0.5 rounded bg-accent-cobaltLight text-accent-cobalt font-bold","TOP MATCH"),make("h3","font-serif text-xl sm:text-2xl font-bold",top.role),make("p","text-xs text-ink-500",`Matches ${top.have.length} of ${top.benchmark.length} listed role benchmark skills.`));const right=make("div","text-left sm:text-right shrink-0");right.append(make("div","font-mono text-3xl font-extrabold text-accent-cobalt",scoreText(top.score)),make("span","text-[10px] font-mono text-ink-500","BACKEND MATCH SCORE"));card.append(left,right)}
     const total=DATA.trendRows.reduce((a,r)=>a+Number(r.value||0),0);$("market-total").textContent=DATA.trendRows.length?String(total):"—";$("snapshot-date").textContent=DATA.trendDate;$("market-date-label").textContent=DATA.trendError||`${DATA.trendRows.length} role records · ${DATA.trendDate}`;const sourceUrl=DATA.trendRows[0]?.source_url;if(sourceUrl&&sourceUrl.startsWith("https://")){$("snapshot-source").href=sourceUrl;$("snapshot-source").textContent=`${DATA.source} · ${DATA.trendDate}`}else{$("snapshot-source").textContent=DATA.trendRows.length?`${DATA.source} · ${DATA.trendDate}`:"Source unavailable"}
     $("pace-pill").textContent=state.pace==="steady"?"STEADY":"FOCUSED";$("pace-copy").textContent=state.pace==="steady"?"A planning preference only. No employment outcome or future market is predicted.":"A faster suggested study pace only; no job outcome or future market is predicted.";
   }
@@ -171,9 +183,13 @@
     $("benchmark-status-profile").textContent=benchmarkNote;
     $("benchmark-status-matches").textContent=`Transparent matching against ${DATA.benchmarkIsIllustrative?"illustrative built-in role benchmarks":"team-supplied role skills"}; these are not verified O*NET standards.`;
     const container=$("vault-skills-container");container.replaceChildren();
-    const covered=new Set(Object.values(CATEGORIES).flat().map(s=>s.toLowerCase()));
+    const available=new Set(DATA.skills.map(skill=>skill.toLowerCase()));
+    const visibleCategories=Object.entries(CATEGORIES)
+      .map(([category,skills])=>[category,skills.filter(skill=>available.has(skill.toLowerCase()))])
+      .filter(([,skills])=>skills.length);
+    const covered=new Set(visibleCategories.flatMap(([,skills])=>skills.map(s=>s.toLowerCase())));
     const additional=[...DATA.skills.filter(s=>!covered.has(s.toLowerCase())),...state.custom];
-    const groups=[...Object.entries(CATEGORIES),["Additional Skills",additional]];
+    const groups=[...visibleCategories,["Additional Skills",additional]];
     for(const [category,skills] of groups){
       const box=make("div","p-4 bg-parchment-50 rounded-xl border border-slate-200 space-y-3");const head=make("div","flex justify-between text-xs font-mono font-bold pb-2 border-hairline-b");head.append(make("span","",category.toUpperCase()),make("span","text-ink-500 text-[10px]","SELF-ASSESSMENT"));const grid=make("div","grid grid-cols-1 sm:grid-cols-2 gap-2.5");
       [...new Set(skills)].forEach(skill=>{const selected=state.skills.has(skill.toLowerCase());const card=make("div",`p-3 rounded-xl border flex items-center justify-between gap-2 ${selected?"bg-white border-accent-cobalt":"bg-white/70 border-slate-200"}`);const label=make("label","flex items-center gap-2 text-xs font-mono font-semibold");const check=make("input");check.type="checkbox";check.checked=selected;check.addEventListener("change",()=>setSkill(skill,check.checked));label.append(check,make("span","",skill));card.append(label);if(selected){const select=make("select","text-[10px] font-mono px-2 py-1 rounded border border-slate-300 bg-white");["Beginner","Intermediate","Advanced"].forEach(t=>{const o=make("option","",t);o.value=t;select.append(o)});select.value=state.tiers[skill]||"Intermediate";select.addEventListener("change",()=>{state.tiers[skill]=select.value;toast("Self-assessed level updated")});card.append(select)}grid.append(card)});
@@ -182,17 +198,32 @@
     $("sidebar-user-name").textContent=state.name||"Student Preview";$("sidebar-skill-badge").textContent=`${state.skills.size} skills`;$("sidebar-focus-tags").textContent=[...state.interests].map(i=>`#${i}`).join(" ")||"not selected";
   }
   function renderMatches(ranked,usingBackend){
-    const stack=$("matches-cards-stack");stack.replaceChildren();ranked.slice(0,3).forEach((r,index)=>{const b=make("button",`text-left p-5 rounded-2xl border flex flex-col justify-between min-h-40 ${state.selectedRole===r.role?"border-accent-cobalt ring-2 ring-blue-100":"border-slate-200"} bg-white`);b.type="button";b.append(make("span","text-accent-cobalt font-mono text-[11px] font-bold",`#0${index+1} MATCH`),make("h3","font-serif font-bold text-lg mt-2",r.role),make("span","font-mono text-2xl font-bold text-ink-900 mt-2",`${r.score}%`),make("span","text-[11px] font-mono text-ink-500 mt-2",`Skills ${r.have.length}/${r.benchmark.length} · ${r.gaps.length} gaps`));b.addEventListener("click",()=>{state.selectedRole=r.role;render()});stack.append(b)});
+    if(!ranked.length){
+      state.selectedRole=null;
+      ["matches-cards-stack","matches-role-header","matches-matrix-table"].forEach(id=>$(id).replaceChildren());
+      $("matches-role-header").append(make("p","text-sm text-ink-700",DATA.matchError||"Backend match results are unavailable."));
+      $("match-order-note").textContent="No recommendation is shown until skills and role data are available.";
+      $("matches-delta-count").textContent="—";
+      return;
+    }
+    const stack=$("matches-cards-stack");stack.replaceChildren();ranked.slice(0,3).forEach((r,index)=>{const b=make("button",`text-left p-5 rounded-2xl border flex flex-col justify-between min-h-40 ${state.selectedRole===r.role?"border-accent-cobalt ring-2 ring-blue-100":"border-slate-200"} bg-white`);b.type="button";b.append(make("span","text-accent-cobalt font-mono text-[11px] font-bold",`#0${index+1} MATCH`),make("h3","font-serif font-bold text-lg mt-2",r.role),make("span","font-mono text-2xl font-bold text-ink-900 mt-2",scoreText(r.score)),make("span","text-[11px] font-mono text-ink-500 mt-2",`Skills ${r.have.length}/${r.benchmark.length} · ${r.gaps.length} gaps`));b.addEventListener("click",()=>{state.selectedRole=r.role;render()});stack.append(b)});
     const active=ranked.find(r=>r.role===state.selectedRole)||ranked[0];state.selectedRole=active.role;
-    const header=$("matches-role-header");header.replaceChildren();header.append(make("span","text-xs font-mono px-2.5 py-1 rounded bg-accent-cobaltLight text-accent-cobalt font-bold",DATA.benchmarkIsIllustrative?"ILLUSTRATIVE BUILT-IN BENCHMARK":"TEAM-SUPPLIED WEIGHTED ROLE SKILLS"),make("h3","font-serif text-2xl sm:text-3xl font-bold",active.role),make("div","font-mono text-4xl font-extrabold text-accent-cobalt",`${active.score}%`),make("p","text-xs text-ink-500",`Matched ${active.have.length} of ${active.benchmark.length} listed skills (${active.earnedWeight} of ${active.totalWeight} weight points); ${active.aligned?"at least one selected interest aligns.":"no selected interest currently aligns."} Interest alignment does not change the score.`));
-    $("match-order-note").textContent=usingBackend?"The sample-profile order comes from the team's weighted matching function. Edited profiles recalculate the same weighted skill formula in the interface.":"Roles are ordered by weighted skill coverage, then alphabetically for ties. Interests are displayed separately and do not affect the score.";
+    const header=$("matches-role-header");header.replaceChildren();header.append(make("span","text-xs font-mono px-2.5 py-1 rounded bg-accent-cobaltLight text-accent-cobalt font-bold",DATA.benchmarkIsIllustrative?"ILLUSTRATIVE BUILT-IN BENCHMARK":"TEAM-SUPPLIED WEIGHTED ROLE SKILLS"),make("h3","font-serif text-2xl sm:text-3xl font-bold",active.role),make("div","font-mono text-4xl font-extrabold text-accent-cobalt",scoreText(active.score)),make("p","text-xs text-ink-500",`Matches ${active.have.length} of ${active.benchmark.length} listed skills; ${active.aligned?"at least one selected interest aligns.":"no selected interest currently aligns."} Interests are not scored.`));
+    $("match-order-note").textContent=usingBackend?"Scores and role order are returned by backend.match_roles() for the current profile.":"Backend match results are unavailable.";
     $("matches-delta-count").textContent=`${active.gaps.length} gaps`;
     const table=$("matches-matrix-table");table.replaceChildren();active.benchmark.forEach(skill=>{const have=active.have.includes(skill);const weight=Number(DATA.benchmarkWeights?.[active.role]?.[skill]??1);const row=make("div",`p-3 rounded-xl border flex items-center justify-between gap-3 ${have?"bg-white border-slate-200":"bg-accent-crimsonLight/40 border-red-200"}`);const detail=make("div");detail.append(make("b",`font-mono text-xs ${have?"text-ink-900":"text-accent-crimson"}`,skill),make("span","text-[10px] text-ink-500 block",`${have?"Self-reported skill selected":"Gap to consider learning"} · weight ${weight}`));row.append(detail,make("span",`text-[10px] font-mono px-2 py-1 rounded ${have?"bg-emerald-50 text-accent-emerald":"bg-red-50 text-accent-crimson"}`,have?"SELF-REPORTED":"GAP"));table.append(row)});
   }
   function currentTarget(ranked){return ranked.find(r=>r.role===state.selectedRole)||ranked[0]}
-  function plan(ranked){const target=DATA.roles.includes($("target-role").value)?$("target-role").value:currentTarget(ranked).role;return {role:target,entry:(DATA.benchmarks[target]||[]).filter(s=>!state.skills.has(s.toLowerCase())).map(skill=>({skill,resource:DATA.resources[skill]||null,paid:DATA.lowCost[skill]||null}))}}
+  function plan(ranked){const target=DATA.roles.includes($("target-role").value)?$("target-role").value:currentTarget(ranked)?.role;const gaps=ranked.find(r=>r.role===target)?.gaps||[];return {role:target,entry:gaps.map(skill=>({skill,resource:DATA.resources[skill]||null,paid:DATA.lowCost[skill]||null}))}}
   function weekRange(i,n,weeks){const start=Math.floor(i*weeks/n)+1,end=Math.max(start,Math.floor((i+1)*weeks/n));return start===end?`Week ${start}`:`Weeks ${start}–${end}`}
   function renderPlan(ranked){
+    if(!ranked.length){
+      $("target-role").replaceChildren();
+      $("reskill-cards-grid").replaceChildren(make("p","text-sm text-ink-700",DATA.matchError||"Backend match results are unavailable."));
+      $("reskill-timeline-stack").replaceChildren();
+      $("reskill-runway-note").textContent="Choose skills before building a reskilling plan.";
+      return;
+    }
     const select=$("target-role");select.replaceChildren();DATA.roles.forEach(role=>{const o=make("option","",role);select.append(o)});select.value=currentTarget(ranked).role;
     document.querySelectorAll(".reskill-runway-btn").forEach(b=>{const on=Number(b.dataset.runway)===state.runway;b.className=`reskill-runway-btn py-2 rounded text-xs ${on?"bg-accent-cobalt text-white font-bold":"text-ink-700"}`});
     document.querySelectorAll(".reskill-budget-btn").forEach(b=>{const on=b.dataset.budget===state.budget;b.className=`reskill-budget-btn py-2 rounded text-xs ${on?"bg-accent-emerald text-white font-bold":"text-ink-700"}`});
@@ -206,7 +237,7 @@
     });
   }
   function render(rankedPack){const out=rankedPack||rank();renderMarket(out.matches);renderVault();renderMatches(out.matches,out.usingBackend);renderPlan(out.matches)}
-  function applyPersona(key){const p=DATA.personas[key];if(!p)return;state.persona=key;state.name=p.name;state.degree=p.degree;state.skills=new Set(p.skills.map(x=>x.toLowerCase()));state.interests=new Set(p.interests);state.selectedRole=null;document.querySelectorAll(".persona-btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.persona===key)));render();toast("Sample profile loaded")}
+  function applyPersona(key){const p=DATA.personas[key];if(!p)return;const available=new Set(allSkills().map(x=>x.toLowerCase()));state.persona=key;state.name=p.name;state.degree=p.degree;state.skills=new Set(p.skills.filter(x=>available.has(x.toLowerCase())).map(x=>x.toLowerCase()));state.interests=new Set(p.interests);state.selectedRole=null;publishProfile()}
   function readTxt(file,statusId){
     if(!file)return;
     const found=$(statusId==="vault-cv-status"?"cv-found":"fast-cv-found");
@@ -246,17 +277,18 @@
   document.querySelectorAll(".persona-btn").forEach(b=>b.addEventListener("click",()=>applyPersona(b.dataset.persona)));
   $("sidebar-open-btn").addEventListener("click",openDrawer);$("sidebar-close-btn").addEventListener("click",closeDrawer);$("drawer-shade").addEventListener("click",closeDrawer);
   $("vault-name-input").addEventListener("input",e=>{state.name=e.target.value.slice(0,60);$("sidebar-user-name").textContent=state.name||"Student Preview"});$("vault-degree-select").replaceChildren(...DATA.degrees.map(d=>{const o=make("option","",d);return o}));$("vault-degree-select").value=state.degree;$("vault-degree-select").addEventListener("change",e=>{state.degree=e.target.value;state.persona=null});
-  $("btn-sync-profile").addEventListener("click",()=>{state.persona=null;render();navigate("page-market");toast("Profile reflected in career matches")});
-  $("custom-skill-form").addEventListener("submit",e=>{e.preventDefault();const input=$("custom-skill-input"),s=input.value.trim();if(!s)return;if(allSkills().some(x=>x.toLowerCase()===s.toLowerCase())){toast("That skill is already listed");return}state.custom.push(s);state.persona=null;input.value="";render()});
+  $("btn-sync-profile").addEventListener("click",()=>{state.persona=null;state.page="page-market";publishProfile()});
+  $("custom-skill-form").addEventListener("submit",e=>{e.preventDefault();const input=$("custom-skill-input"),s=input.value.trim();if(!s)return;if(allSkills().some(x=>x.toLowerCase()===s.toLowerCase())){toast("That skill is already listed");return}state.custom.push(s);state.persona=null;input.value="";publishProfile()});
   $("fast-file").addEventListener("change",e=>readTxt(e.target.files[0],"fast-cv-status"));$("vault-file").addEventListener("change",e=>readTxt(e.target.files[0],"vault-cv-status"));
   document.querySelectorAll(".pace-btn").forEach(b=>b.addEventListener("click",()=>{state.pace=b.dataset.pace;state.runway=state.pace==="focused"?4:8;document.querySelectorAll(".pace-btn").forEach(x=>{x.className=`pace-btn text-xs font-mono py-2 rounded-lg ${x===b?"bg-accent-cobalt text-white font-bold":"bg-white border border-slate-200 text-ink-700"}`});render()}));
   document.querySelectorAll("[data-runway]").forEach(b=>b.addEventListener("click",()=>{state.runway=Number(b.dataset.runway);render()}));document.querySelectorAll("[data-budget]").forEach(b=>b.addEventListener("click",()=>{state.budget=b.dataset.budget;render()}));$("target-role").addEventListener("change",e=>{state.selectedRole=e.target.value;render()});
-  $("btn-export-reskill-md").addEventListener("click",exportPlan);$("btn-sync-cal-reskill").addEventListener("click",exportCalendar);
+  $("btn-export-reskill-md").addEventListener("click",()=>rank().matches.length?exportPlan():toast(DATA.matchError||"Select at least one skill."));
+  $("btn-sync-cal-reskill").addEventListener("click",()=>rank().matches.length?exportCalendar():toast(DATA.matchError||"Select at least one skill."));
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
-  applyPersona("cs_student");
+  document.querySelectorAll(".persona-btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.persona===state.persona)));
   const requestedView=new URLSearchParams(window.location.search).get("view");
   const viewMap={market:"page-market",profile:"page-profile",matches:"page-matches",reskilling:"page-reskilling"};
-  navigate(viewMap[requestedView]||"page-market");
+  navigate(viewMap[requestedView]||state.page||"page-market");
 })();
 </script>
 </body></html>

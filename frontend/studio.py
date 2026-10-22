@@ -3,6 +3,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+_STUDIO_COMPONENT = None
+
+
 def build_studio_html(data: dict) -> str:
     """Build testable iframe HTML, safely embedding the Python-backed catalog."""
     source_path = Path(__file__).with_name("studio.html")
@@ -17,23 +20,35 @@ def build_studio_html(data: dict) -> str:
     return source.replace("__FUTUREPATH_DATA__", payload)
 
 
-def render_studio(data: dict) -> None:
-    """Render studio at viewport size without Streamlit chrome or outer scroll."""
+def render_studio(data: dict):
+    """Render the studio as a bidirectional component so Python owns match scoring."""
     import streamlit as st
     import streamlit.components.v1 as components
+
+    global _STUDIO_COMPONENT
+    if _STUDIO_COMPONENT is None:
+        _STUDIO_COMPONENT = components.declare_component(
+            "futurepath_studio",
+            path=str(Path(__file__).parent),
+        )
 
     st.markdown(
         """<style>
         [data-testid="stHeader"],[data-testid="stToolbar"],[data-testid="stDecoration"],
         [data-testid="stSidebar"],footer{display:none!important}
-        .stApp{height:100dvh;overflow:hidden}
+        .stApp{min-height:100dvh}
         .block-container{max-width:none!important;padding:0!important}
         [data-testid="stMainBlockContainer"]{padding:0!important}
         [data-testid="stVerticalBlock"]{gap:0!important}
-        [data-testid="stAppViewContainer"],[data-testid="stMain"]{height:100dvh;overflow:hidden}
-        [data-testid="stIFrame"],[data-testid="stIFrame"] iframe{height:100dvh!important;min-height:100dvh!important}
+        [data-testid="stAppViewContainer"],[data-testid="stMain"]{min-height:100dvh}
+        [data-testid="stCustomComponentV1"]{width:100%}
         iframe{display:block}
         </style>""",
         unsafe_allow_html=True,
     )
-    components.html(build_studio_html(data), height=1000, scrolling=False)
+    return _STUDIO_COMPONENT(
+        html=build_studio_html(data),
+        key="futurepath-studio",
+        default=None,
+        height=1000,
+    )
