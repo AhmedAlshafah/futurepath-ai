@@ -14,6 +14,24 @@ TREND_SIGNALS_FILE = DATA_DIR / "trend_signals.csv"
 # had a title matching the role. Rows with any other metric are ignored.
 MARKET_METRIC = "title_matched_unique_remote_listings"
 
+# Different spellings that mean the same skill. Keys and values are lowercase.
+# The left side is a short/alternate name, the right side is the name used in role_skills.csv.
+SKILL_ALIASES = {
+    "excel": "microsoft excel",
+    "power bi": "microsoft power bi",
+    # role_skills.csv spells this both ways ("Tensor Flow" and "TensorFlow"), so treat them as one.
+    "tensor flow": "tensorflow",
+}
+
+
+def normalize_skill(name):
+    """Turn a skill name into one comparable key, e.g. " Excel " -> "microsoft excel"."""
+    # Lowercase it, and split()/join() trims the ends and squashes repeated spaces into one.
+    key = " ".join(name.lower().split())
+
+    # If this spelling has an alias, swap in the official name; otherwise keep it as is.
+    return SKILL_ALIASES.get(key, key)
+
 
 def load_role_skills(path=ROLE_SKILLS_FILE):
     """Read role_skills.csv into {role: {skill: weight}}.
@@ -114,7 +132,10 @@ def load_trend_signals(path=TREND_SIGNALS_FILE):
 def match_roles(user_skills, role_skills, trend_signals=None):
     """Score each role by how much of its weighted skill set the user has.
 
-    Returns a list of dicts sorted best match first. Each dict has:
+    Skill names on both sides go through normalize_skill, so "Excel" matches
+    "Microsoft Excel". Only skills are scored (interests are unused in the MVP).
+
+    Returns every role as a list of dicts sorted best match first. Each dict has:
       role, match_pct (0-100, weighted), matched_skills, missing_skills,
       market_listing_count, market_metric, market_source_url, retrieved_at
       (all None when the role has no market data), trend_score (always None)
@@ -123,9 +144,9 @@ def match_roles(user_skills, role_skills, trend_signals=None):
     # If no market data was passed in, use an empty dict so every role just gets None market fields.
     trend_signals = trend_signals or {}
 
-    # Lowercase and trim the user's skills so "python " and "Python" count as the same skill.
+    # Normalize the user's skills so "python ", "Python" and "Excel"/"Microsoft Excel" compare equal.
     # A set makes the "does the user have this skill?" check fast.
-    user = {s.strip().lower() for s in user_skills if s and s.strip()}
+    user = {normalize_skill(s) for s in user_skills if s and s.strip()}
 
     # This list collects one result per role.
     results = []
@@ -139,11 +160,12 @@ def match_roles(user_skills, role_skills, trend_signals=None):
         if total <= 0:
             continue
 
-        # Skills the role needs that the user already has.
-        matched = [skill for skill in skills if skill.lower() in user]
+        # Skills the role needs that the user already has. The dataset name is normalized
+        # the same way as the user's, but we keep the dataset's spelling for display.
+        matched = [skill for skill in skills if normalize_skill(skill) in user]
 
         # Skills the role needs that the user doesn't have yet (their skill gap).
-        missing = [skill for skill in skills if skill.lower() not in user]
+        missing = [skill for skill in skills if normalize_skill(skill) not in user]
 
         # Add up the weights of the matched skills only.
         earned = sum(skills[skill] for skill in matched)
