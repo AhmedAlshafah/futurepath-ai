@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from backend.matching import load_role_skills, load_trend_signals, match_roles
 from frontend.studio import render_studio
+from frontend.course_catalog import load_course_catalog
 import streamlit as st
 
 st.set_page_config(
@@ -43,115 +44,11 @@ ROLE_INTERESTS = {
     "Software Developer": {"Software Development"},
 }
 
-LEARNING_RESOURCES = {
-    "Python": {
-        "provider": "Kaggle Learn",
-        "title": "Python",
-        "url": "https://www.kaggle.com/learn/python",
-        "duration": "5 hours",
-    },
-    "SQL": {
-        "provider": "Kaggle Learn",
-        "title": "Intro to SQL",
-        "url": "https://www.kaggle.com/learn/intro-to-sql",
-        "duration": "3 hours",
-    },
-    "Excel": {
-        "provider": "GCFGlobal / LearnFree",
-        "title": "Excel tutorials",
-        "url": "https://edu.gcfglobal.org/en/excel/",
-    },
-    "R": {
-        "provider": "Posit Cloud Education",
-        "title": "Primers: interactive R lessons",
-        "url": "https://posit.cloud/learn/primers",
-    },
-    "Tableau": {
-        "provider": "Tableau",
-        "title": "Free Training Videos",
-        "url": "https://www.tableau.com/learn/training",
-    },
-    "Power BI": {
-        "provider": "Microsoft Learn",
-        "title": "Power BI learning paths",
-        "url": "https://learn.microsoft.com/en-us/training/powerplatform/power-bi/",
-    },
-    "TensorFlow": {
-        "provider": "TensorFlow",
-        "title": "TensorFlow tutorials",
-        "url": "https://www.tensorflow.org/tutorials",
-    },
-    "PyTorch": {
-        "provider": "PyTorch",
-        "title": "Learn the Basics",
-        "url": "https://pytorch.org/tutorials/beginner/basics/intro.html",
-    },
-    "MLOps": {
-        "provider": "Made With ML",
-        "title": "MLOps Course",
-        "url": "https://madewithml.com/courses/mlops",
-    },
-    "Docker": {
-        "provider": "Docker",
-        "title": "Docker Get Started",
-        "url": "https://docs.docker.com/get-started/",
-    },
-    "Kubernetes": {
-        "provider": "Kubernetes",
-        "title": "Learn Kubernetes Basics",
-        "url": "https://kubernetes.io/docs/tutorials/kubernetes-basics/",
-    },
-    "Linux": {
-        "provider": "Linux Journey",
-        "title": "Learn Linux",
-        "url": "https://linuxjourney.com/",
-    },
-    "Azure": {
-        "provider": "Microsoft Learn",
-        "title": "Azure training",
-        "url": "https://learn.microsoft.com/en-us/training/azure/",
-    },
-    "PowerShell": {
-        "provider": "Microsoft Learn",
-        "title": "PowerShell learning paths",
-        "url": "https://learn.microsoft.com/en-us/training/browse/?products=powershell",
-    },
-    "AWS": {
-        "provider": "AWS Skill Builder",
-        "title": "AWS Cloud Practitioner Essentials",
-        "url": "https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials",
-    },
-    "Java": {
-        "provider": "dev.java",
-        "title": "Learn Java",
-        "url": "https://dev.java/learn/",
-    },
-    "JavaScript": {
-        "provider": "MDN Web Docs",
-        "title": "JavaScript guide",
-        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
-    },
-    "Git": {
-        "provider": "Pro Git",
-        "title": "Read the Pro Git book online",
-        "url": "https://git-scm.com/book/en/v2",
-    },
-    "Splunk Enterprise": {
-        "provider": "Splunk",
-        "title": "Splunk Education",
-        "url": "https://www.splunk.com/en_us/training.html",
-    },
-}
-LOW_COST_COURSES = {
-    "SQL": {
-        "provider": "Udemy",
-        "title": "The Ultimate MySQL Bootcamp: Go from SQL Beginner to Expert",
-        "url": "https://www.udemy.com/course/the-ultimate-mysql-bootcamp-go-from-sql-beginner-to-expert/",
-        "price": 10.99,
-        "currency": "USD",
-        "checked_on": "21 Oct 2026",
-    },
-}
+try:
+    LEARNING_RESOURCES, LOW_COST_COURSES = load_course_catalog()
+except (OSError, ValueError, UnicodeError) as error:
+    st.error(f"Could not load data/course.csv: {error}. Fix the catalog and rerun the app.")
+    st.stop()
 PERSONAS = {
     "cs_student": {
         "name": "Student Preview",
@@ -299,6 +196,7 @@ def _clean_component_value(value):
     known_personas = set(PERSONAS)
     known_roles = set(roles)
     known_pages = {
+        "page-home",
         "page-market",
         "page-profile",
         "page-matches",
@@ -327,7 +225,7 @@ def _clean_component_value(value):
     selected_role = ui_state.get("selectedRole")
     selected_role = selected_role if selected_role in known_roles else None
     page = ui_state.get("page")
-    page = page if page in known_pages else "page-market"
+    page = page if page in known_pages else "page-home"
 
     tiers = profile.get("tiers")
     if not isinstance(tiers, dict):
@@ -357,7 +255,7 @@ def _clean_component_value(value):
 
     return {
         "profile": {
-            "name": str(profile.get("name") or "Student Preview")[:60],
+            "name": str(profile.get("name") or "")[:60],
             "degree": degree,
             "skills": clean_text_list(profile.get("skills")),
             "interests": [
@@ -382,14 +280,17 @@ def _clean_component_value(value):
 
 if "futurepath_profile" not in st.session_state:
     st.session_state.futurepath_profile = {
-        **PERSONAS["cs_student"],
-        "persona": "cs_student",
+        "name": "",
+        "degree": DEGREES[0],
+        "skills": [],
+        "interests": [],
+        "persona": None,
         "custom": [],
         "tiers": {},
     }
 if "futurepath_ui_state" not in st.session_state:
     st.session_state.futurepath_ui_state = {
-        "page": "page-market",
+        "page": "page-home",
         "selectedRole": None,
         "runway": 8,
         "budget": "free",

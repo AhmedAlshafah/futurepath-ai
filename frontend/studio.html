@@ -1,294 +1,44 @@
 <!doctype html>
-<html lang="en" class="h-full antialiased">
+<html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FuturePath AI — Career readiness</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- STUDIO_CSS -->
-<style>
-.border-hairline-r{border-right:1px solid #e2e8f0}
-.border-hairline-t{border-top:1px solid #e2e8f0}
-@media(max-width:767px){#top-page-desc{display:none}#top-page-title{font-size:18px;line-height:1.25}}
-</style>
-<style>
-*{box-sizing:border-box}html,body{margin:0;height:100%;background:#fbfbfa;color:#0f172a}body{font-family:"Plus Jakarta Sans",sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #87a9f5;outline-offset:2px}.border-hairline{border:1px solid #e2e8f0}.border-hairline-b{border-bottom:1px solid #e2e8f0}.page-view[hidden]{display:none!important}.soft-shadow{box-shadow:0 1px 3px #0f172a08,0 1px 2px #0f172a05}.skill-chip[aria-pressed=true]{background:#0f172a;color:#fff;border-color:#0f172a}.nav-item[aria-current=true]{background:#eff4ff;color:#004be5;border-color:#bfcef4}.persona-btn[aria-pressed=true]{border-color:#004be5;background:#fff;box-shadow:0 1px 3px #0f172a0d}.drawer-shade{display:none}.toast{animation:arrive .18s ease-out}@keyframes arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:767px){#app-sidebar{position:fixed;inset:0 auto 0 0;width:min(19rem,88vw);transform:translateX(-105%);transition:transform .22s ease;z-index:60}#app-sidebar.drawer-open{transform:translateX(0)}.drawer-shade.visible{display:block;position:fixed;inset:0;z-index:55;background:#0f172a66}.main-scroll{height:100dvh}.page-view{padding-bottom:1rem}#top-page-desc{max-width:52vw}.mobile-hide{display:none!important}}@media(min-width:768px){#app-sidebar{position:static;transform:none!important}.main-scroll{height:100dvh}}
-</style>
-<style>
-/* Preserve the supplied studio design while keeping metadata readable. */
-.text-\[9px\],.text-\[10px\]{font-size:11px}
-.text-accent-emerald{color:#047857}
-.text-accent-amber{color:#a15a08}
-.text-ink-500{color:#58687e}
-.bg-accent-emerald{background-color:#047857}
-@media(max-width:1023px){
-  #app-sidebar{position:fixed;inset:0 auto 0 0;width:min(19rem,88vw);transform:translateX(-105%)!important;transition:transform .22s ease;z-index:60}
-  #app-sidebar.drawer-open{transform:translateX(0)!important}
-  #sidebar-open-btn,#sidebar-close-btn{display:inline-flex}
-  .drawer-shade.visible{display:block;position:fixed;inset:0;z-index:55;background:#0f172a66}
-  .mobile-hide{display:none!important}
-}
-@media(max-width:1100px){
-  #page-market>div:first-child{flex-direction:column}
-  #page-market>div:first-child>div:last-child{align-self:flex-start}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>FuturePath — your next step</title>
+  <!-- STUDIO_CSS -->
 </head>
-<body class="bg-parchment-50 text-ink-900 min-h-[100dvh] flex overflow-hidden">
-<script id="futurepath-data" type="application/json">__FUTUREPATH_DATA__</script>
-<div id="drawer-shade" class="drawer-shade" aria-hidden="true"></div>
-<aside id="app-sidebar" class="w-72 bg-white border-hairline-r flex flex-col justify-between shrink-0">
- <div>
-  <div class="h-20 px-6 border-hairline-b flex items-center justify-between">
-   <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-accent-cobalt flex items-center justify-center text-white font-mono font-bold text-sm">FP</div><div><span class="font-serif font-bold text-xl tracking-tight block leading-tight">Future<span class="text-accent-cobalt">Path</span></span><span class="text-[9px] font-mono uppercase tracking-widest text-ink-500 font-semibold block">SDC 2026 // DOMAIN 1</span></div></div>
-   <button id="sidebar-close-btn" type="button" class="md:hidden text-ink-500 p-2" aria-label="Close navigation">×</button>
+<body>
+  <script id="futurepath-data" type="application/json">__FUTUREPATH_DATA__</script>
+  <div class="shell">
+    <header class="topline" id="journey-header">
+      <button class="brand" data-go="home" aria-label="FuturePath home">
+        <span class="brand-mark" aria-hidden="true">F</span>FuturePath
+      </button>
+      <span class="session-note">Your skills. Your next step.</span>
+    </header>
+    <div class="progress-wrap" id="journey-progress">
+      <div class="progress-meta"><span id="progress-label"></span><span id="progress-title"></span></div>
+      <div class="steps" aria-hidden="true">
+        <span class="step-line"><i></i></span>
+        <span class="step-line"><i></i></span>
+        <span class="step-line"><i></i></span>
+      </div>
+    </div>
+    <main class="main" id="main" tabindex="-1">
+      <section id="page-home" class="page-view" hidden><!-- STUDIO_LANDING --></section>
+      <section id="page-profile" class="page-view" hidden></section>
+      <section id="page-matches" class="page-view" hidden></section>
+      <section id="page-reskilling" class="page-view" hidden></section>
+      <section id="page-market" class="page-view" hidden></section>
+    </main>
   </div>
-  <div class="px-6 py-3.5 bg-parchment-50 border-hairline-b flex items-center justify-between font-mono text-[10px]">
-   <span class="text-accent-emerald font-semibold">● SNAPSHOT DATA</span><span id="snapshot-date" class="text-ink-500"></span>
-  </div>
-  <nav id="nav-container" class="p-4 space-y-1.5">
-   <button data-page="page-market" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-left text-xs font-semibold border border-transparent" aria-current="true"><span class="font-mono text-base">▥</span><span><span class="block">1. Market &amp; Fast Radar</span><small class="font-mono text-[10px] text-ink-500 font-normal">Dated market &amp; fast scan</small></span></button>
-   <button data-page="page-profile" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-left text-xs font-semibold border border-transparent text-ink-700"><span class="font-mono text-base">◉</span><span><span class="block">2. User Competency Vault</span><small class="font-mono text-[10px] text-ink-500 font-normal">Profile, TXT intake &amp; skills</small></span></button>
-   <button data-page="page-matches" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-left text-xs font-semibold border border-transparent text-ink-700"><span class="font-mono text-base">◷</span><span><span class="block">3. Career Matches &amp; Gaps</span><small class="font-mono text-[10px] text-ink-500 font-normal">Ranked scores &amp; skill delta</small></span></button>
-   <button data-page="page-reskilling" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-left text-xs font-semibold border border-transparent text-ink-700"><span class="font-mono text-base">▤</span><span><span class="block">4. Reskilling Studio</span><small class="font-mono text-[10px] text-ink-500 font-normal">Reviewed courses &amp; pace</small></span></button>
+  <nav class="floating-nav" id="journey-nav" aria-label="Journey steps">
+    <button data-step="skills">Your skills</button>
+    <button data-step="matches">Career matches</button>
+    <button data-step="plan">Learning plan</button>
+    <button data-step="market">Market snapshot</button>
   </nav>
- </div>
- <div class="p-4 border-hairline-t bg-parchment-50 space-y-3 font-mono text-[11px]">
-  <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1.5"><span class="text-[10px] text-ink-500 uppercase font-bold block">Current Profile State</span><div class="flex justify-between gap-2"><span id="sidebar-user-name" class="text-ink-700 font-sans text-xs font-semibold">Student Preview</span><span id="sidebar-skill-badge" class="text-[10px] px-1.5 py-0.5 rounded bg-accent-emeraldLight text-accent-emerald font-bold">0 skills</span></div><div class="text-[10px] text-ink-500">Focus: <span id="sidebar-focus-tags" class="text-ink-700 font-bold">not selected</span></div></div>
-  <div id="benchmark-status-side" class="text-[10px] text-ink-500 text-center">Role benchmark source · reviewed learning links</div>
- </div>
-</aside>
-<main class="main-scroll flex-1 min-w-0 overflow-y-auto">
- <header class="h-20 bg-white/95 border-hairline-b sticky top-0 z-30 px-4 sm:px-8 flex items-center justify-between">
-  <div class="flex items-center gap-3"><button id="sidebar-open-btn" type="button" class="md:hidden text-ink-900 p-2 border border-slate-200 rounded-lg" aria-label="Open navigation" aria-expanded="false">☰</button><div><h2 id="top-page-title" class="font-serif font-bold text-xl">Market Intelligence &amp; Radar</h2><p id="top-page-desc" class="text-xs text-ink-500">Dated remote listing snapshot &amp; profile assessment</p></div></div>
-  <div class="mobile-hide flex gap-2 text-[10px] font-mono"><span class="px-2 py-1 rounded bg-accent-emeraldLight border border-emerald-200 text-accent-emerald font-semibold">SDG 4.4 Technical</span><span class="px-2 py-1 rounded bg-accent-cobaltLight border border-blue-200 text-accent-cobalt font-semibold">SDG 8.2 Productivity</span></div>
- </header>
- <div class="max-w-[1500px] w-full mx-auto p-4 sm:p-8 space-y-8">
-  <section id="page-market" class="page-view space-y-8">
-   <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow flex flex-col md:flex-row justify-between gap-6"><div class="max-w-2xl"><span class="inline-flex text-xs font-mono text-accent-cobalt bg-accent-cobaltLight border border-blue-200 px-3 py-1 rounded-full font-semibold">OVERVIEW · FAST DISCOVERY</span><h1 class="font-serif text-3xl sm:text-4xl font-bold tracking-tight mt-3">Future Skills Radar <i class="font-normal text-ink-500">&amp;</i> Hiring Snapshot</h1><p class="text-sm text-ink-700 leading-relaxed mt-2">Compare your self-reported skills with supported role benchmarks, see how a match is calculated, and review dated remote-listing evidence.</p></div><div class="bg-parchment-50 p-4 rounded-xl border border-slate-200 text-center font-mono text-xs min-w-[220px] self-center"><span class="text-[10px] text-ink-500 uppercase font-bold block">Snapshot total · not unique roles</span><div id="market-total" class="text-2xl font-bold text-accent-cobalt">—</div><span id="market-date-label" class="text-[10px] text-ink-500 font-semibold block"></span></div></div>
-   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-    <div class="lg:col-span-5 space-y-6">
-     <div class="bg-white rounded-2xl border-hairline p-6 soft-shadow space-y-6">
-      <div class="flex justify-between pb-3 border-hairline-b"><h3 class="text-sm uppercase tracking-wider font-bold">Quick Profile Scanner</h3><span class="text-[10px] font-mono text-accent-emerald font-bold">Sample profiles only</span></div>
-      <div><label class="block font-mono text-[11px] uppercase text-ink-500 font-bold mb-2">Quick Persona Preview</label><div class="grid grid-cols-3 gap-2"><button data-persona="cs_student" class="persona-btn p-2.5 rounded-xl border border-slate-200 bg-parchment-50 text-left"><b class="text-xs block">CS Student</b><small class="text-[10px] font-mono text-accent-emerald">Data / Python</small></button><button data-persona="qa_analyst" class="persona-btn p-2.5 rounded-xl border border-slate-200 bg-parchment-50 text-left"><b class="text-xs block">Junior QA</b><small class="text-[10px] font-mono text-accent-amber">Testing / SQL</small></button><button data-persona="web_dev" class="persona-btn p-2.5 rounded-xl border border-slate-200 bg-parchment-50 text-left"><b class="text-xs block">Self-taught</b><small class="text-[10px] font-mono text-accent-cobalt">Web / APIs</small></button></div></div>
-      <div><label class="block font-mono text-[11px] uppercase text-ink-500 font-bold mb-2" for="fast-file">Resume keyword scan · TXT only</label><label class="block border-2 border-dashed border-slate-300 hover:border-accent-cobalt bg-parchment-50 p-4 rounded-xl text-center cursor-pointer"><span class="text-xs text-ink-700 font-semibold">Choose a plain-text .txt resume</span><span class="block text-[10px] font-mono text-ink-500 mt-1">Local keyword recognition only; not AI, verification, or document upload</span><input id="fast-file" type="file" accept=".txt,text/plain" class="sr-only"></label><div id="fast-cv-status" class="text-[10px] text-ink-500 mt-1" aria-live="polite">Your file stays in this browser session and is not retained.</div><div id="fast-cv-found" class="flex flex-wrap gap-1 mt-2"></div></div>
-      <div class="bg-parchment-50 p-4 rounded-xl border border-slate-200 space-y-2"><div class="flex justify-between"><span class="font-mono text-[11px] uppercase font-bold">Learning pace comparison</span><span id="pace-pill" class="text-[10px] font-mono px-2 py-0.5 rounded bg-accent-cobaltLight text-accent-cobalt font-bold">STEADY</span></div><div class="grid grid-cols-2 gap-2"><button data-pace="steady" class="pace-btn text-xs font-mono py-2 rounded-lg bg-accent-cobalt text-white font-bold">Steady pace</button><button data-pace="focused" class="pace-btn text-xs font-mono py-2 rounded-lg bg-white border border-slate-200">Focused pace</button></div><p id="pace-copy" class="text-[11px] text-ink-500 font-serif italic">A planning preference only. No employment outcome or future market is predicted.</p></div>
-      <div><div class="flex justify-between items-center mb-2"><label class="font-mono text-[11px] uppercase text-ink-500 font-bold">Fast Skill Check</label><button data-go="page-profile" class="text-[10px] font-mono text-accent-cobalt">Manage in Vault →</button></div><div id="fast-skills-cloud" class="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto"></div></div>
-     </div>
-    </div>
-    <div class="lg:col-span-7 space-y-6">
-     <div class="bg-white rounded-2xl border-hairline p-6 soft-shadow space-y-5"><div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-hairline-b"><h3 class="text-sm uppercase tracking-wider font-bold">Himalayas Remote Market Snapshot</h3><a id="snapshot-source" class="text-[10px] font-mono text-ink-500 underline" target="_blank" rel="noopener noreferrer"></a></div><div id="fast-market-bars" class="space-y-3 font-mono"></div><div class="bg-parchment-50 p-3.5 rounded-xl border border-slate-200 text-xs text-ink-700 leading-relaxed"><b class="text-[10px] text-accent-amber uppercase block mb-1">Method &amp; constraints</b>Counts are observations from a single dated query snapshot, using exact occupational title matches. A zero may reflect query constraints; it does not indicate no industry demand. Counts are not unique occupations, live data, or a forecast.</div></div>
-     <div class="bg-white rounded-2xl border-hairline p-6 soft-shadow space-y-4"><div class="flex justify-between gap-3"><span class="font-mono text-xs font-bold text-accent-cobalt">EXPLAINABLE WEIGHTED SKILL MATCH</span><span class="text-[10px] font-mono text-ink-500">TEAM BENCHMARK WEIGHTS</span></div><div id="fast-fit-card" class="p-5 rounded-xl bg-parchment-50 border border-slate-200 flex flex-col sm:flex-row justify-between gap-4"></div><div class="flex justify-between pt-2 text-xs font-mono"><button data-go="page-matches" class="text-accent-cobalt font-bold">Inspect skill gaps →</button><button data-go="page-reskilling" class="px-3.5 py-1.5 rounded-lg bg-accent-cobalt text-white font-semibold">Launch Reskilling Studio →</button></div></div>
-    </div>
-   </div>
-  </section>
-  <section id="page-profile" class="page-view space-y-8" hidden>
-   <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow"><span class="text-xs font-mono text-accent-cobalt font-bold uppercase tracking-wider">COMPETENCY INTAKE · SELF-REPORTED PROFILE</span><h1 class="font-serif text-3xl sm:text-4xl font-bold mt-1">User Profile &amp; Competency Vault</h1><p class="text-sm text-ink-700 mt-1">Academic context, TXT keyword suggestions, and your own skill assessment. A skill selection is not proof of competence.</p></div>
-   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-    <div class="lg:col-span-5 space-y-6"><div class="bg-white rounded-2xl border-hairline p-6 soft-shadow space-y-4"><h3 class="text-sm uppercase tracking-wider font-bold pb-2 border-hairline-b">Candidate Profile</h3><label class="block text-[10px] font-mono uppercase text-ink-500 font-bold">Sample name<input id="vault-name-input" value="Student Preview" maxlength="60" class="block mt-1 w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></label><label class="block text-[10px] font-mono uppercase text-ink-500 font-bold">Field of study<select id="vault-degree-select" class="block mt-1 w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></select></label><div><span class="block text-[10px] font-mono uppercase text-ink-500 font-bold mb-2">Technical interests</span><div id="interest-pills" class="flex flex-wrap gap-2"></div></div><button id="btn-sync-profile" class="w-full px-4 py-2 rounded-xl bg-accent-cobalt text-white font-mono text-xs font-bold">Sync Profile with Radar →</button><p class="text-[10px] text-ink-500">Degree is contextual only; it is not used in the match score.</p></div>
-     <div class="bg-white rounded-2xl border-hairline p-6 soft-shadow space-y-4"><div class="flex justify-between border-hairline-b pb-2"><h3 class="text-sm uppercase tracking-wider font-bold">TXT Resume Keyword Preview</h3><span class="text-[10px] text-accent-emerald font-mono">LOCAL ONLY</span></div><label class="block border-2 border-dashed border-slate-300 bg-parchment-50 p-5 rounded-xl text-center cursor-pointer"><span class="text-xs font-bold">Choose .txt to suggest recognized skills</span><span class="text-[10px] text-ink-500 block mt-1">TXT only · PDF/DOCX are not supported</span><input id="vault-file" type="file" accept=".txt,text/plain" class="sr-only"></label><div id="vault-cv-status" class="text-[11px] text-ink-500" aria-live="polite">No file selected. Nothing is uploaded or stored.</div><div id="cv-found" class="flex flex-wrap gap-1"></div><p class="text-[10px] text-ink-500 leading-relaxed">Keyword recognition is a convenience, not AI analysis or verification. Suggestions are not added to your profile until you choose each skill.</p></div></div>
-    <div class="lg:col-span-7"><div class="bg-white rounded-2xl border-hairline p-6 soft-shadow space-y-6"><div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-hairline-b gap-3"><div><h3 class="text-sm uppercase tracking-wider font-bold">Competency Inventory</h3><p class="text-xs text-ink-500">Self-assessed possession and level; tiers do not affect ranking.</p></div><form id="custom-skill-form" class="flex gap-2"><input id="custom-skill-input" maxlength="48" placeholder="Add skill…" class="min-w-0 px-3 py-1.5 rounded-lg border border-slate-300 text-xs"><button class="px-3 py-1.5 rounded-lg bg-ink-900 text-white font-mono text-xs font-bold">Add</button></form></div><div id="vault-skills-container" class="space-y-5"></div><div id="benchmark-status-profile" class="text-[10px] text-ink-500"></div></div></div>
-   </div>
-  </section>
-  <section id="page-matches" class="page-view space-y-8" hidden>
-   <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow flex flex-col md:flex-row justify-between gap-4"><div><span class="text-xs font-mono text-accent-emerald font-bold uppercase tracking-wider">EXPLAINABLE MATCHING · PILOT</span><h1 class="font-serif text-3xl sm:text-4xl font-bold mt-1">Career Matches &amp; Skill Gap Matrix</h1><p id="benchmark-status-matches" class="text-sm text-ink-700 mt-1"></p></div><button data-go="page-reskilling" class="px-4 py-2 rounded-xl bg-accent-cobalt text-white font-mono text-xs font-bold self-start">Proceed to Reskilling Studio →</button></div>
-   <div class="space-y-3"><div class="flex justify-between gap-2"><span class="font-mono text-xs font-bold uppercase">Top 3 Career Matches</span><span class="text-[10px] font-mono text-ink-500">SELECT A ROLE FOR GAP DETAIL</span></div><div id="matches-cards-stack" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></div>
-    <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow space-y-7"><div id="matches-role-header" class="space-y-4 pb-6 border-hairline-b"></div><div class="bg-parchment-50 p-4 rounded-xl border border-slate-200 space-y-2"><div class="font-mono text-xs font-bold">BACKEND MATCHING</div><p class="text-xs text-ink-700 leading-relaxed">Scores and role order come from the team's backend match_roles function. It matches normalized skills using the team-assigned weights and rounds the percentage to one decimal place. Interests, degree, and self-assessed skill tiers are not scored. This is a comparison aid, not a probability of employment or verified readiness.</p><p id="match-order-note" class="text-[10px] text-ink-500"></p></div><div><div class="flex justify-between font-mono text-xs mb-3"><span class="font-bold uppercase">Skill-by-skill delta matrix</span><span id="matches-delta-count" class="text-[10px] text-accent-crimson font-bold"></span></div><div id="matches-matrix-table" class="space-y-2"></div></div><div class="bg-parchment-50 p-4 rounded-xl border border-slate-200 text-xs text-ink-700">SDG 4.4 and SDG 8.2 are broad project alignment badges only; no per-role SDG research mapping is asserted.</div></div>
-  </section>
-  <section id="page-reskilling" class="page-view space-y-8" hidden>
-   <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow flex flex-col md:flex-row justify-between gap-4"><div><span class="text-xs font-mono text-accent-cobalt font-bold uppercase tracking-wider">ACTIONABLE ROADMAP · REVIEWED CATALOG</span><h1 class="font-serif text-3xl sm:text-4xl font-bold mt-1">Personalized Reskilling Studio</h1><p class="text-sm text-ink-700 mt-1">Reviewed links are suggestions for gap skills, not endorsements or guarantees.</p></div><div class="flex gap-2"><button id="btn-export-reskill-md" class="px-3.5 py-2 rounded-xl bg-ink-900 text-white font-mono text-xs font-bold">Export syllabus (.md)</button><button id="btn-sync-cal-reskill" class="px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-ink-700 font-mono text-xs font-bold">Download .ics plan</button></div></div>
-   <div class="bg-white rounded-2xl border-hairline p-6 soft-shadow space-y-5"><div class="flex justify-between pb-3 border-hairline-b"><h3 class="text-sm uppercase tracking-wider font-bold">Learning plan settings</h3><span class="text-[10px] font-mono text-ink-500">SUGGESTED PACE, NOT COURSE LENGTH</span></div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><label class="text-[10px] font-mono uppercase text-ink-500 font-bold">Target career<select id="target-role" class="block mt-1 w-full px-3 py-2 rounded-lg border border-slate-300 text-xs normal-case"></select></label><div><span class="block text-[10px] font-mono uppercase text-ink-500 font-bold mb-1">Suggested pace</span><div class="grid grid-cols-3 gap-1 bg-parchment-50 p-1 rounded-lg border border-slate-200"><button data-runway="4" class="reskill-runway-btn py-2 rounded text-xs">4 wks</button><button data-runway="8" class="reskill-runway-btn py-2 rounded text-xs">8 wks</button><button data-runway="12" class="reskill-runway-btn py-2 rounded text-xs">12 wks</button></div></div><div><span class="block text-[10px] font-mono uppercase text-ink-500 font-bold mb-1">Resource budget</span><div class="grid grid-cols-2 gap-1 bg-parchment-50 p-1 rounded-lg border border-slate-200"><button data-budget="free" class="reskill-budget-btn py-2 rounded text-xs">Free only</button><button data-budget="lowcost" class="reskill-budget-btn py-2 rounded text-xs">Free + low-cost</button></div></div></div><p id="reskill-runway-note" class="text-[10px] text-ink-500">Suggested weekly pacing distributes gap skills across the selected runway.</p></div>
-   <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow space-y-5"><div class="flex items-center justify-between pb-3 border-hairline-b font-mono text-xs"><span class="font-bold uppercase">Gap-focused course links</span><span class="text-accent-cobalt font-bold">REVIEWED CATALOG ONLY</span></div><div id="reskill-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div></div>
-   <div class="bg-white rounded-2xl border-hairline p-6 sm:p-7 soft-shadow space-y-5"><div class="flex items-center justify-between pb-3 border-hairline-b font-mono text-xs"><span class="font-bold uppercase">Ordered suggested study pace</span><span class="text-accent-cobalt font-bold">BENCHMARK ORDER</span></div><div id="reskill-timeline-stack" class="space-y-3"></div><p class="text-[10px] text-ink-500 leading-relaxed">Completion is self-reported and reversible; it is not proof of competence. Module progress stays in place for each role until you change its checkbox. Course details and any provider-listed durations/prices should be confirmed on the linked provider page.</p></div>
-  </section>
- </div>
-</main>
-<div id="toast-container" class="fixed bottom-5 right-5 z-[80] space-y-2" aria-live="polite"></div>
-<script>
-(() => {
-  "use strict";
-  const DATA = JSON.parse(document.getElementById("futurepath-data").textContent);
-  const CATEGORIES = {
-    "Data & Analytics":["SQL","Excel","Statistics","Data Visualization","Power BI"],
-    "AI & Machine Learning":["Python","Machine Learning","MLOps"],
-    "Core Software Engineering":["Git","APIs","Databases","JavaScript"],
-    "Cloud & Infrastructure":["AWS","Azure","Linux","Networking","Cloud Computing"],
-    "Security & Problem Solving":["Cybersecurity","Problem Solving"]
-  };
-  const titles={
-    "page-market":["Market Intelligence & Radar","Dated remote listing snapshot & profile assessment"],
-    "page-profile":["User Competency Vault","Academic context, TXT keyword scan & self-assessed skills"],
-    "page-matches":["Career Matches & Skill Gap Matrix","Explainable matching & benchmark gap detail"],
-    "page-reskilling":["Personalized Reskilling Studio","Reviewed learning links & suggested study pace"]
-  };
-  const initial=DATA.profile||DATA.personas.cs_student||{name:"Student Preview",degree:DATA.degrees[0],skills:[],interests:[]};
-  const savedView=DATA.uiState||{};
-  const state={page:savedView.page||"page-market",persona:initial.persona||null,name:initial.name||"Student Preview",degree:initial.degree||DATA.degrees[0],skills:new Set((initial.skills||[]).map(s=>s.toLowerCase())),interests:new Set(initial.interests||[]),custom:initial.custom||[],tiers:initial.tiers||{},selectedRole:savedView.selectedRole||null,runway:savedView.runway||8,budget:savedView.budget||"free",pace:savedView.pace||"steady",completed:savedView.completed||{},cvFound:savedView.cvFound||[]};
-  const $=id=>document.getElementById(id);
-  const navPaths=[
-    '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
-    '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
-    '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
-    '<path d="M12 7v14m0-14C9 4 5 5 2 5v14c3 0 7-1 10 2m0-14c3-3 7-2 10-2v14c-3 0-7-1-10 2"/>'
-  ];
-  document.querySelectorAll(".nav-item>span:first-child").forEach((element,index)=>{
-    element.setAttribute("aria-hidden","true");
-    element.innerHTML=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${navPaths[index]}</svg>`;
-  });
-  const make=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};
-  function toast(message){const n=make("div","toast bg-ink-900 text-white text-xs font-mono px-4 py-3 rounded-lg shadow-lg",message);$("toast-container").appendChild(n);setTimeout(()=>n.remove(),2600)}
-  function navigate(page){if(!titles[page])return;state.page=page;document.querySelectorAll(".page-view").forEach(n=>n.hidden=n.id!==page);document.querySelectorAll(".nav-item").forEach(n=>n.setAttribute("aria-current",String(n.dataset.page===page)));$("top-page-title").textContent=titles[page][0];$("top-page-desc").textContent=titles[page][1];closeDrawer();document.querySelector(".main-scroll").scrollTo({top:0,behavior:"instant"});render()}
-  window.navigateToPage=navigate;
-  function openDrawer(){$("app-sidebar").classList.add("drawer-open");$("drawer-shade").classList.add("visible");$("sidebar-open-btn").setAttribute("aria-expanded","true");$("sidebar-close-btn").focus()}
-  function closeDrawer(){$("app-sidebar").classList.remove("drawer-open");$("drawer-shade").classList.remove("visible");$("sidebar-open-btn").setAttribute("aria-expanded","false")}
-  function scoreText(score){return `${Number(score).toFixed(1)}%`}
-  function publishProfile(){
-    window.parent.postMessage({type:"futurepath:state",value:{
-      profile:{name:state.name,degree:state.degree,skills:allSkills().filter(skill=>state.skills.has(skill.toLowerCase())).map(skill=>DATA.skillValues?.[skill]||skill),interests:[...state.interests],persona:state.persona,custom:state.custom,tiers:state.tiers},
-      uiState:{page:state.page,selectedRole:state.selectedRole,runway:state.runway,budget:state.budget,pace:state.pace,completed:state.completed,cvFound:state.cvFound}
-    }},"*");
-  }
-  function rank(){
-    const matches=(DATA.backendMatches||[]).map(result=>{
-      const role=result.role;
-      const benchmark=DATA.benchmarks[role]||[];
-      const have=result.matched_skills||[];
-      const gaps=result.missing_skills||[];
-      const aligned=(DATA.roleInterests[role]||[]).some(i=>state.interests.has(i));
-      return {role,benchmark,have,gaps,aligned,score:Number(result.match_pct)};
-    });
-    return {matches,usingBackend:true};
-  }
-  function allSkills(){return [...new Set([...DATA.skills,...state.custom])].sort((a,b)=>a.localeCompare(b))}
-  function setSkill(skill,checked){const key=skill.toLowerCase();checked?state.skills.add(key):state.skills.delete(key);state.persona=null;publishProfile()}
-  function createChip(skill){const b=make("button","skill-chip text-xs font-mono px-2.5 py-1 rounded-lg border border-slate-200 transition hover:border-slate-400");b.type="button";b.textContent=(state.skills.has(skill.toLowerCase())?"✓ ":"")+skill;b.setAttribute("aria-pressed",String(state.skills.has(skill.toLowerCase())));b.addEventListener("click",()=>setSkill(skill,!state.skills.has(skill.toLowerCase())));return b}
-  function renderMarket(ranked){
-    const cloud=$("fast-skills-cloud");cloud.replaceChildren();allSkills().slice(0,24).forEach(s=>cloud.appendChild(createChip(s)));
-    const bars=$("fast-market-bars");bars.replaceChildren();
-    const rows=DATA.roles.map(role=>{const r=DATA.trendRows.find(x=>x.role===role);return {role,value:r?Number(r.value):null}}).sort((a,b)=>(b.value??-1)-(a.value??-1));
-    const max=Math.max(1,...rows.map(r=>r.value||0));
-    rows.forEach(r=>{const row=make("div","space-y-1");const top=make("div","flex justify-between gap-3 text-xs");top.append(make("span","text-ink-900 font-medium",r.role),make("strong",r.value===0?"text-accent-amber":"text-accent-emerald",r.value===null?"—":`${r.value} listings`));const track=make("div","w-full bg-parchment-100 h-2 rounded-full overflow-hidden border border-slate-200");const bar=make("div",`h-full rounded-full ${r.value===0?"bg-amber-400":"bg-accent-cobalt"}`);bar.style.width=`${Math.max(r.value===0?0:4,((r.value||0)/max)*100)}%`;track.append(bar);row.append(top,track);bars.append(row)});
-    const top=ranked[0];const card=$("fast-fit-card");card.replaceChildren();
-    if(!top){card.append(make("p","text-sm text-ink-700",DATA.matchError||"Backend match results are unavailable."))}
-    else {const left=make("div","space-y-1");left.append(make("span","text-[10px] font-mono px-2 py-0.5 rounded bg-accent-cobaltLight text-accent-cobalt font-bold","TOP MATCH"),make("h3","font-serif text-xl sm:text-2xl font-bold",top.role),make("p","text-xs text-ink-500",`Matches ${top.have.length} of ${top.benchmark.length} listed role benchmark skills.`));const right=make("div","text-left sm:text-right shrink-0");right.append(make("div","font-mono text-3xl font-extrabold text-accent-cobalt",scoreText(top.score)),make("span","text-[10px] font-mono text-ink-500","BACKEND MATCH SCORE"));card.append(left,right)}
-    const total=DATA.trendRows.reduce((a,r)=>a+Number(r.value||0),0);$("market-total").textContent=DATA.trendRows.length?String(total):"—";$("snapshot-date").textContent=DATA.trendDate;$("market-date-label").textContent=DATA.trendError||`${DATA.trendRows.length} role records · ${DATA.trendDate}`;const sourceUrl=DATA.trendRows[0]?.source_url;if(sourceUrl&&sourceUrl.startsWith("https://")){$("snapshot-source").href=sourceUrl;$("snapshot-source").textContent=`${DATA.source} · ${DATA.trendDate}`}else{$("snapshot-source").textContent=DATA.trendRows.length?`${DATA.source} · ${DATA.trendDate}`:"Source unavailable"}
-    $("pace-pill").textContent=state.pace==="steady"?"STEADY":"FOCUSED";$("pace-copy").textContent=state.pace==="steady"?"A planning preference only. No employment outcome or future market is predicted.":"A faster suggested study pace only; no job outcome or future market is predicted.";
-  }
-  function renderVault(){
-    $("vault-name-input").value=state.name;$("vault-degree-select").value=state.degree;
-    const interests=$("interest-pills");interests.replaceChildren();DATA.interests.forEach(item=>{const b=make("button",`px-2.5 py-1 rounded-lg border text-[10px] font-mono ${state.interests.has(item)?"bg-accent-cobaltLight border-blue-200 text-accent-cobalt":"bg-white border-slate-200 text-ink-700"}`,item);b.type="button";b.setAttribute("aria-pressed",String(state.interests.has(item)));b.addEventListener("click",()=>{state.interests.has(item)?state.interests.delete(item):state.interests.add(item);state.persona=null;render()});interests.append(b)});
-    const benchmarkNote=DATA.benchmarkIsIllustrative?"Built-in fallback benchmarks are illustrative and are not verified O*NET data.":"Role skills are team-supplied and are not independently verified O*NET data.";
-    $("benchmark-status-side").textContent=benchmarkNote;
-    $("benchmark-status-profile").textContent=benchmarkNote;
-    $("benchmark-status-matches").textContent=`Transparent matching against ${DATA.benchmarkIsIllustrative?"illustrative built-in role benchmarks":"team-supplied role skills"}; these are not verified O*NET standards.`;
-    const container=$("vault-skills-container");container.replaceChildren();
-    const available=new Set(DATA.skills.map(skill=>skill.toLowerCase()));
-    const visibleCategories=Object.entries(CATEGORIES)
-      .map(([category,skills])=>[category,skills.filter(skill=>available.has(skill.toLowerCase()))])
-      .filter(([,skills])=>skills.length);
-    const covered=new Set(visibleCategories.flatMap(([,skills])=>skills.map(s=>s.toLowerCase())));
-    const additional=[...DATA.skills.filter(s=>!covered.has(s.toLowerCase())),...state.custom];
-    const groups=[...visibleCategories,["Additional Skills",additional]];
-    for(const [category,skills] of groups){
-      const box=make("div","p-4 bg-parchment-50 rounded-xl border border-slate-200 space-y-3");const head=make("div","flex justify-between text-xs font-mono font-bold pb-2 border-hairline-b");head.append(make("span","",category.toUpperCase()),make("span","text-ink-500 text-[10px]","SELF-ASSESSMENT"));const grid=make("div","grid grid-cols-1 sm:grid-cols-2 gap-2.5");
-      [...new Set(skills)].forEach(skill=>{const selected=state.skills.has(skill.toLowerCase());const card=make("div",`p-3 rounded-xl border flex items-center justify-between gap-2 ${selected?"bg-white border-accent-cobalt":"bg-white/70 border-slate-200"}`);const label=make("label","flex items-center gap-2 text-xs font-mono font-semibold");const check=make("input");check.type="checkbox";check.checked=selected;check.addEventListener("change",()=>setSkill(skill,check.checked));label.append(check,make("span","",skill));card.append(label);if(selected){const select=make("select","text-[10px] font-mono px-2 py-1 rounded border border-slate-300 bg-white");["Beginner","Intermediate","Advanced"].forEach(t=>{const o=make("option","",t);o.value=t;select.append(o)});select.value=state.tiers[skill]||"Intermediate";select.addEventListener("change",()=>{state.tiers[skill]=select.value;toast("Self-assessed level updated")});card.append(select)}grid.append(card)});
-      box.append(head,grid);container.append(box);
-    }
-    $("sidebar-user-name").textContent=state.name||"Student Preview";$("sidebar-skill-badge").textContent=`${state.skills.size} skills`;$("sidebar-focus-tags").textContent=[...state.interests].map(i=>`#${i}`).join(" ")||"not selected";
-  }
-  function renderMatches(ranked,usingBackend){
-    if(!ranked.length){
-      state.selectedRole=null;
-      ["matches-cards-stack","matches-role-header","matches-matrix-table"].forEach(id=>$(id).replaceChildren());
-      $("matches-role-header").append(make("p","text-sm text-ink-700",DATA.matchError||"Backend match results are unavailable."));
-      $("match-order-note").textContent="No recommendation is shown until skills and role data are available.";
-      $("matches-delta-count").textContent="—";
-      return;
-    }
-    const stack=$("matches-cards-stack");stack.replaceChildren();ranked.slice(0,3).forEach((r,index)=>{const b=make("button",`text-left p-5 rounded-2xl border flex flex-col justify-between min-h-40 ${state.selectedRole===r.role?"border-accent-cobalt ring-2 ring-blue-100":"border-slate-200"} bg-white`);b.type="button";b.append(make("span","text-accent-cobalt font-mono text-[11px] font-bold",`#0${index+1} MATCH`),make("h3","font-serif font-bold text-lg mt-2",r.role),make("span","font-mono text-2xl font-bold text-ink-900 mt-2",scoreText(r.score)),make("span","text-[11px] font-mono text-ink-500 mt-2",`Skills ${r.have.length}/${r.benchmark.length} · ${r.gaps.length} gaps`));b.addEventListener("click",()=>{state.selectedRole=r.role;render()});stack.append(b)});
-    const active=ranked.find(r=>r.role===state.selectedRole)||ranked[0];state.selectedRole=active.role;
-    const header=$("matches-role-header");header.replaceChildren();header.append(make("span","text-xs font-mono px-2.5 py-1 rounded bg-accent-cobaltLight text-accent-cobalt font-bold",DATA.benchmarkIsIllustrative?"ILLUSTRATIVE BUILT-IN BENCHMARK":"TEAM-SUPPLIED WEIGHTED ROLE SKILLS"),make("h3","font-serif text-2xl sm:text-3xl font-bold",active.role),make("div","font-mono text-4xl font-extrabold text-accent-cobalt",scoreText(active.score)),make("p","text-xs text-ink-500",`Matches ${active.have.length} of ${active.benchmark.length} listed skills; ${active.aligned?"at least one selected interest aligns.":"no selected interest currently aligns."} Interests are not scored.`));
-    $("match-order-note").textContent=usingBackend?"Scores and role order are returned by backend.match_roles() for the current profile.":"Backend match results are unavailable.";
-    $("matches-delta-count").textContent=`${active.gaps.length} gaps`;
-    const table=$("matches-matrix-table");table.replaceChildren();active.benchmark.forEach(skill=>{const have=active.have.includes(skill);const weight=Number(DATA.benchmarkWeights?.[active.role]?.[skill]??1);const row=make("div",`p-3 rounded-xl border flex items-center justify-between gap-3 ${have?"bg-white border-slate-200":"bg-accent-crimsonLight/40 border-red-200"}`);const detail=make("div");detail.append(make("b",`font-mono text-xs ${have?"text-ink-900":"text-accent-crimson"}`,skill),make("span","text-[10px] text-ink-500 block",`${have?"Self-reported skill selected":"Gap to consider learning"} · weight ${weight}`));row.append(detail,make("span",`text-[10px] font-mono px-2 py-1 rounded ${have?"bg-emerald-50 text-accent-emerald":"bg-red-50 text-accent-crimson"}`,have?"SELF-REPORTED":"GAP"));table.append(row)});
-  }
-  function currentTarget(ranked){return ranked.find(r=>r.role===state.selectedRole)||ranked[0]}
-  function plan(ranked){const target=DATA.roles.includes($("target-role").value)?$("target-role").value:currentTarget(ranked)?.role;const gaps=ranked.find(r=>r.role===target)?.gaps||[];return {role:target,entry:gaps.map(skill=>({skill,resource:DATA.resources[skill]||null,paid:DATA.lowCost[skill]||null}))}}
-  function weekRange(i,n,weeks){const start=Math.floor(i*weeks/n)+1,end=Math.max(start,Math.floor((i+1)*weeks/n));return start===end?`Week ${start}`:`Weeks ${start}–${end}`}
-  function renderPlan(ranked){
-    if(!ranked.length){
-      $("target-role").replaceChildren();
-      $("reskill-cards-grid").replaceChildren(make("p","text-sm text-ink-700",DATA.matchError||"Backend match results are unavailable."));
-      $("reskill-timeline-stack").replaceChildren();
-      $("reskill-runway-note").textContent="Choose skills before building a reskilling plan.";
-      return;
-    }
-    const select=$("target-role");select.replaceChildren();DATA.roles.forEach(role=>{const o=make("option","",role);select.append(o)});select.value=currentTarget(ranked).role;
-    document.querySelectorAll(".reskill-runway-btn").forEach(b=>{const on=Number(b.dataset.runway)===state.runway;b.className=`reskill-runway-btn py-2 rounded text-xs ${on?"bg-accent-cobalt text-white font-bold":"text-ink-700"}`});
-    document.querySelectorAll(".reskill-budget-btn").forEach(b=>{const on=b.dataset.budget===state.budget;b.className=`reskill-budget-btn py-2 rounded text-xs ${on?"bg-accent-emerald text-white font-bold":"text-ink-700"}`});
-    const p=plan(ranked),cards=$("reskill-cards-grid"),timeline=$("reskill-timeline-stack");cards.replaceChildren();timeline.replaceChildren();$("reskill-runway-note").textContent=`${state.runway}-week suggested pace; timeline is not provider course duration.`;
-    if(!p.entry.length){cards.append(make("div","md:col-span-2 p-5 rounded-xl bg-accent-emeraldLight text-sm text-ink-700","No listed benchmark gaps for this role based on your self-reported selections. Nothing has been verified."));timeline.append(make("p","text-sm text-ink-500","No gap-specific study steps to suggest yet."));return}
-    p.entry.forEach((item,i)=>{const week=weekRange(i,p.entry.length,state.runway);const checked=!!state.completed[`${p.role}|${item.skill}`];const card=make("article","p-4 rounded-xl border border-slate-200 bg-parchment-50 space-y-3");const head=make("div","flex items-start justify-between gap-3");head.append(make("div","font-mono text-[10px] uppercase text-accent-cobalt font-bold",`STEP ${String(i+1).padStart(2,"0")} · ${week}`),make("span","font-serif text-lg font-bold",item.skill));const checkbox=make("input");checkbox.type="checkbox";checkbox.checked=checked;checkbox.setAttribute("aria-label",`Mark ${item.skill} study step complete (self-reported)`);checkbox.addEventListener("change",()=>{state.completed[`${p.role}|${item.skill}`]=checkbox.checked;renderPlan(ranked)});head.append(checkbox);card.append(head);
-      if(item.resource){card.append(make("div","text-[10px] font-mono text-ink-500 uppercase",item.resource.provider),make("div","text-sm font-semibold",item.resource.title));if(item.resource.duration)card.append(make("p","text-[10px] text-ink-500",`Provider-listed time: ${item.resource.duration}; check current details on provider page.`));const a=make("a","inline-flex text-xs font-mono font-bold text-accent-cobalt underline","Open reviewed free resource ↗");a.href=item.resource.url;a.target="_blank";a.rel="noopener noreferrer";card.append(a)}else card.append(make("p","text-xs text-ink-500","No reviewed learning resource is mapped to this skill yet."));
-      if(state.budget==="lowcost"){if(item.paid){const paid=make("div","border-t pt-3 space-y-2");paid.append(make("p","text-xs font-semibold",`${item.paid.provider}: ${item.paid.title}`),make("p","text-[10px] text-ink-500",`Listed price $${Number(item.paid.price).toFixed(2)} ${item.paid.currency}, checked ${item.paid.checked_on}. Price may vary; confirm with provider.`));const a=make("a","text-xs font-mono font-bold text-accent-cobalt underline","View exact paid course ↗");a.href=item.paid.url;a.target="_blank";a.rel="noopener noreferrer";paid.append(a);card.append(paid)}else card.append(make("p","text-[10px] text-ink-500 border-t pt-2","No reviewed paid course is mapped; no price is estimated."))}
-      cards.append(card);
-      const t=make("label","flex items-start gap-3 p-3 rounded-xl border border-slate-200 bg-white");const box=make("input");box.type="checkbox";box.checked=checked;box.addEventListener("change",()=>{state.completed[`${p.role}|${item.skill}`]=box.checked;renderPlan(ranked)});t.append(box,make("span","text-xs",`${week} · ${item.skill} — suggested study slot${checked?" · marked complete (self-reported)":""}`));timeline.append(t);
-    });
-  }
-  function render(rankedPack){const out=rankedPack||rank();renderMarket(out.matches);renderVault();renderMatches(out.matches,out.usingBackend);renderPlan(out.matches)}
-  function applyPersona(key){const p=DATA.personas[key];if(!p)return;const available=new Set(allSkills().map(x=>x.toLowerCase()));state.persona=key;state.name=p.name;state.degree=p.degree;state.skills=new Set(p.skills.filter(x=>available.has(x.toLowerCase())).map(x=>x.toLowerCase()));state.interests=new Set(p.interests);state.selectedRole=null;publishProfile()}
-  function readTxt(file,statusId){
-    if(!file)return;
-    const found=$(statusId==="vault-cv-status"?"cv-found":"fast-cv-found");
-    found.replaceChildren();
-    if(!file.name.toLowerCase().endsWith(".txt")||file.size>500000){$(statusId).textContent="Choose a .txt file under 500 KB.";return}
-    const reader=new FileReader();
-    reader.onload=()=>{
-      const text=String(reader.result||"").toLocaleLowerCase();
-      state.cvFound=allSkills().filter(s=>{
-        const escaped=s.toLocaleLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-        return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`,"i").test(text);
-      });
-      $(statusId).textContent=`${state.cvFound.length} skill keyword(s) recognized. Choose each suggestion to add it as self-reported.`;
-      state.cvFound.forEach(skill=>{
-        const alreadySelected=state.skills.has(skill.toLowerCase());
-        const button=make("button","px-2 py-1 rounded bg-accent-cobaltLight text-accent-cobalt text-[10px] font-mono",alreadySelected?`${skill} · already selected`:`Add ${skill}`);
-        button.type="button";
-        button.disabled=alreadySelected;
-        button.addEventListener("click",()=>{
-          setSkill(skill,true);
-          button.textContent=`${skill} · added as self-reported`;
-          button.disabled=true;
-          toast(`${skill} added as self-reported`);
-        });
-        found.append(button);
-      });
-    };
-    reader.onerror=()=>{$(statusId).textContent="The TXT file could not be read. Choose another plain-text file.";found.replaceChildren()};
-    reader.onabort=()=>{$(statusId).textContent="TXT scan cancelled.";found.replaceChildren()};
-    reader.readAsText(file);
-  }
-  function escapeICS(s){return String(s).replace(/\\/g,"\\\\").replace(/,/g,"\\,").replace(/;/g,"\\;").replace(/\n/g,"\\n")}
-  function download(name,type,content){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=make("a");a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500)}
-  function exportPlan(){const p=plan(rank().matches);const lines=[`# FuturePath suggested study plan: ${p.role}`,"","Self-reported profile; benchmark and course suggestions are not verification.","Timeline indicates suggested study pace, not provider duration.",""];p.entry.forEach((item,i)=>{lines.push(`## ${weekRange(i,p.entry.length,state.runway)} — ${item.skill}`);if(item.resource){lines.push(`${item.resource.title} — ${item.resource.provider}`,item.resource.url);if(item.resource.duration)lines.push(`Provider-listed time: ${item.resource.duration}`)}else lines.push("No reviewed resource is currently mapped.");if(state.budget==="lowcost"&&item.paid)lines.push(`Optional paid course: ${item.paid.title} (${item.paid.provider}) — $${Number(item.paid.price).toFixed(2)} ${item.paid.currency}, checked ${item.paid.checked_on}`,item.paid.url);lines.push("")});download("futurepath-study-plan.md","text/markdown;charset=utf-8",lines.join("\n"))}
-  function exportCalendar(){const p=plan(rank().matches);const now=new Date();const start=new Date(now);start.setDate(now.getDate()+1);const stamp=d=>d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");const ev=p.entry.map((item,i)=>{const day=new Date(start);day.setDate(start.getDate()+Math.floor(i*state.runway/p.entry.length)*7);const end=new Date(day);end.setDate(day.getDate()+1);const desc=item.resource?`${item.resource.title} — ${item.resource.url}`:"No reviewed course link mapped.";return ["BEGIN:VEVENT",`UID:futurepath-${encodeURIComponent(p.role)}-${i}-${Date.now()}@local`,`DTSTAMP:${stamp(now)}`,`DTSTART;VALUE=DATE:${stamp(day).slice(0,8)}`,`DTEND;VALUE=DATE:${stamp(end).slice(0,8)}`,`SUMMARY:${escapeICS(`FuturePath study: ${item.skill}`)}`,`DESCRIPTION:${escapeICS(`${weekRange(i,p.entry.length,state.runway)} · ${desc} Suggested pace only; completion self-reported.`)}`,"END:VEVENT"].join("\r\n")});download("futurepath-study-plan.ics","text/calendar;charset=utf-8",["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//FuturePath//Study Plan//EN",...ev,"END:VCALENDAR"].join("\r\n"))}
-  document.querySelectorAll(".nav-item").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.page)));document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.go)));
-  document.querySelectorAll(".persona-btn").forEach(b=>b.addEventListener("click",()=>applyPersona(b.dataset.persona)));
-  $("sidebar-open-btn").addEventListener("click",openDrawer);$("sidebar-close-btn").addEventListener("click",closeDrawer);$("drawer-shade").addEventListener("click",closeDrawer);
-  $("vault-name-input").addEventListener("input",e=>{state.name=e.target.value.slice(0,60);$("sidebar-user-name").textContent=state.name||"Student Preview"});$("vault-degree-select").replaceChildren(...DATA.degrees.map(d=>{const o=make("option","",d);return o}));$("vault-degree-select").value=state.degree;$("vault-degree-select").addEventListener("change",e=>{state.degree=e.target.value;state.persona=null});
-  $("btn-sync-profile").addEventListener("click",()=>{state.persona=null;state.page="page-market";publishProfile()});
-  $("custom-skill-form").addEventListener("submit",e=>{e.preventDefault();const input=$("custom-skill-input"),s=input.value.trim();if(!s)return;if(allSkills().some(x=>x.toLowerCase()===s.toLowerCase())){toast("That skill is already listed");return}state.custom.push(s);state.persona=null;input.value="";publishProfile()});
-  $("fast-file").addEventListener("change",e=>readTxt(e.target.files[0],"fast-cv-status"));$("vault-file").addEventListener("change",e=>readTxt(e.target.files[0],"vault-cv-status"));
-  document.querySelectorAll(".pace-btn").forEach(b=>b.addEventListener("click",()=>{state.pace=b.dataset.pace;state.runway=state.pace==="focused"?4:8;document.querySelectorAll(".pace-btn").forEach(x=>{x.className=`pace-btn text-xs font-mono py-2 rounded-lg ${x===b?"bg-accent-cobalt text-white font-bold":"bg-white border border-slate-200 text-ink-700"}`});render()}));
-  document.querySelectorAll("[data-runway]").forEach(b=>b.addEventListener("click",()=>{state.runway=Number(b.dataset.runway);render()}));document.querySelectorAll("[data-budget]").forEach(b=>b.addEventListener("click",()=>{state.budget=b.dataset.budget;render()}));$("target-role").addEventListener("change",e=>{state.selectedRole=e.target.value;render()});
-  $("btn-export-reskill-md").addEventListener("click",()=>rank().matches.length?exportPlan():toast(DATA.matchError||"Select at least one skill."));
-  $("btn-sync-cal-reskill").addEventListener("click",()=>rank().matches.length?exportCalendar():toast(DATA.matchError||"Select at least one skill."));
-  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
-  document.querySelectorAll(".persona-btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.persona===state.persona)));
-  const requestedView=new URLSearchParams(window.location.search).get("view");
-  const viewMap={market:"page-market",profile:"page-profile",matches:"page-matches",reskilling:"page-reskilling"};
-  navigate(viewMap[requestedView]||state.page||"page-market");
-})();
-</script>
-</body></html>
+  <div id="toast-region" role="status" aria-live="polite"></div>
+  <script>/* STUDIO_SCRIPT */</script>
+</body>
+</html>

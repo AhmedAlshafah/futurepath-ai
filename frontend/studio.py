@@ -10,9 +10,19 @@ def build_studio_html(data: dict) -> str:
     """Build testable iframe HTML, safely embedding the Python-backed catalog."""
     source_path = Path(__file__).with_name("studio.html")
     source = source_path.read_text(encoding="utf-8")
-    css_path = source_path.with_name("studio.css")
-    css = f"<style>\n{css_path.read_text(encoding='utf-8')}\n</style>"
+    css = "\n".join(
+        f"<style>\n{source_path.with_name(name).read_text(encoding='utf-8')}\n</style>"
+        for name in ("journey.css", "landing.css")
+    )
     source = source.replace("<!-- STUDIO_CSS -->", css)
+    source = source.replace(
+        "<!-- STUDIO_LANDING -->",
+        source_path.with_name("landing.html").read_text(encoding="utf-8"),
+    )
+    source = source.replace(
+        "/* STUDIO_SCRIPT */",
+        source_path.with_name("journey.js").read_text(encoding="utf-8"),
+    )
     payload = json.dumps(data, ensure_ascii=True, separators=(",", ":"))
     payload = (payload.replace("<", "\\u003c").replace(">", "\\u003e")
                .replace("&", "\\u0026").replace("\u2028", "\\u2028")
