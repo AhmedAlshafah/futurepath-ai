@@ -19,7 +19,7 @@ MARKET_METRIC = "title_matched_unique_remote_listings"
 SKILL_ALIASES = {
     "excel": "microsoft excel",
     "power bi": "microsoft power bi",
-    # role_skills.csv spells this both ways ("Tensor Flow" and "TensorFlow"), so treat them as one.
+    # role_skills.csv uses "TensorFlow", but users may type it with a space, so treat them as one.
     "tensor flow": "tensorflow",
 }
 
