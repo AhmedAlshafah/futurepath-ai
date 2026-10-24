@@ -1,4 +1,4 @@
-    skill,cost_type,provider,title,url,duration_hours,price,currency,last_verified
+skill,cost_type,provider,title,url,duration_hours,price,currency,last_verified
 Python,free,Kaggle Learn,Python,https://www.kaggle.com/learn/python,5,,,
 SQL,free,Kaggle Learn,Intro to SQL,https://www.kaggle.com/learn/intro-to-sql,3,,,
 Excel,free,GCFGlobal / LearnFree,Excel tutorials,https://edu.gcfglobal.org/en/excel/,,,,
