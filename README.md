@@ -33,7 +33,7 @@ FuturePath AI is an explainable career guidance platform that helps students and
 | Live Application  | [https://futurepath-ai.replit.app/](https://futurepath-ai.replit.app/)                           |
 | Replit Project    | https://replit.com/t/sdc-hackathon/repls/futurepath-ai                                                       |
 | Pitch Slides      | https://github.com/AhmedAlshafah/futurepath-ai/blob/main/submission/SDC2026_NovaMind_PitchDeck.pdf                                                                   |
-| Demo Video        | [Add final accessible link]                                                                      |
+| Demo Video        |https://www.youtube.com/watch?v=uJ1a-SoWl14                                                                     |
 
 ## 3. Problem Statement
 
