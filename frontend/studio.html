@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>FuturePath — your next step</title>
+  <!-- STUDIO_CSS -->
+</head>
+<body>
+  <script id="futurepath-data" type="application/json">__FUTUREPATH_DATA__</script>
+  <div class="shell">
+    <header class="topline" id="journey-header">
+      <button class="brand" data-go="home" aria-label="FuturePath home">
+        <span class="brand-mark" aria-hidden="true">F</span>FuturePath
+      </button>
+      <span class="session-note">Your skills. Your next step.</span>
+    </header>
+    <div class="progress-wrap" id="journey-progress">
+      <div class="progress-meta"><span id="progress-label"></span><span id="progress-title"></span></div>
+      <div class="steps" aria-hidden="true">
+        <span class="step-line"><i></i></span>
+        <span class="step-line"><i></i></span>
+        <span class="step-line"><i></i></span>
+      </div>
+    </div>
+    <main class="main" id="main" tabindex="-1">
+      <section id="page-home" class="page-view" hidden><!-- STUDIO_LANDING --></section>
+      <section id="page-profile" class="page-view" hidden></section>
+      <section id="page-matches" class="page-view" hidden></section>
+      <section id="page-reskilling" class="page-view" hidden></section>
+      <section id="page-market" class="page-view" hidden></section>
+    </main>
+  </div>
+  <nav class="floating-nav" id="journey-nav" aria-label="Journey steps">
+    <button data-step="skills">Your skills</button>
+    <button data-step="matches">Career matches</button>
+    <button data-step="plan">Learning plan</button>
+    <button data-step="market">Market snapshot</button>
+  </nav>
+  <div id="toast-region" role="status" aria-live="polite"></div>
+  <script>/* STUDIO_SCRIPT */</script>
+</body>
+</html>

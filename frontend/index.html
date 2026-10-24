@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FuturePath Studio component</title>
+  <style>
+    html, body, #studio-frame { width: 100%; height: 100%; margin: 0; border: 0; overflow: hidden; }
+    body { background: #f8f8f6; }
+    #studio-frame { display: block; }
+  </style>
+</head>
+<body>
+  <iframe id="studio-frame" title="FuturePath career studio"></iframe>
+  <script>
+    "use strict";
+    const frame = document.getElementById("studio-frame");
+    let currentHtml = "";
+
+    function sendStreamlitMessage(type, extra = {}) {
+      window.parent.postMessage({ isStreamlitMessage: true, type, ...extra }, "*");
+    }
+
+    function resizeFrame(fallback = 1000) {
+      let height = fallback;
+      try { height = window.parent.innerHeight - 8; } catch (_) {}
+      sendStreamlitMessage("streamlit:setFrameHeight", {
+        height: Math.max(480, height),
+      });
+    }
+
+    window.addEventListener("message", (event) => {
+      const message = event.data;
+      if (!message || typeof message !== "object") return;
+
+      // Streamlit's incoming render messages do not carry isStreamlitMessage.
+      if (event.source === window.parent && message.type === "streamlit:render") {
+        clearInterval(readyTimer);
+        const html = message.args && message.args.html;
+        if (typeof html === "string" && html !== currentHtml) {
+          currentHtml = html;
+          frame.srcdoc = html;
+        }
+        resizeFrame(message.args.height);
+      } else if (
+        event.source === frame.contentWindow &&
+        message.type === "futurepath:state"
+      ) {
+        sendStreamlitMessage("streamlit:setComponentValue", {
+          value: message.value,
+          dataType: "json",
+        });
+      }
+    });
+
+    const announceReady = () =>
+      sendStreamlitMessage("streamlit:componentReady", { apiVersion: 1 });
+    // A tiny static component may load before Streamlit registers its iframe.
+    // Retry the handshake until the first render acknowledges readiness.
+    const readyTimer = setInterval(announceReady, 250);
+    window.addEventListener("load", announceReady, { once: true });
+    window.addEventListener("resize", () => {
+      if (currentHtml) resizeFrame();
+    });
+  </script>
+</body>
+</html>
