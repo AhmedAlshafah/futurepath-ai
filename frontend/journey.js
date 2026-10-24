@@ -187,7 +187,8 @@
         }).join("") || '<div class="notice">No listed benchmark gaps based on your self-reported selections. This is not a proficiency verification.</div>'}
       </section>
       <section class="panel soft"><div class="panel-head"><div><h2>Take your plan with you</h2><p>Download your role, pacing, learning links, and self-reported progress.</p></div></div>
-        <div class="download-row"><button class="secondary" id="btn-export-reskill-md">Download plan · MD</button><button class="secondary" id="btn-sync-cal-reskill" ${gaps.length ? "" : "disabled"}>Download schedule · ICS</button></div>
+        <div class="download-row"><button class="secondary" id="btn-export-reskill-pdf">Save as PDF</button><button class="secondary" id="btn-export-reskill-md">Download plan · MD</button><button class="secondary" id="btn-sync-cal-reskill" ${gaps.length ? "" : "disabled"}>Download schedule · ICS</button></div>
+        <p class="footnote">PDF opens a print-friendly plan in a new tab. Choose “Save as PDF” in your browser’s print window.</p>
         <p class="footnote">Selections stay in this app session; download your plan to keep a copy.</p>
       </section>
       <div class="actions"><button class="secondary" data-go="matches">← Back to matches</button><div class="actions-right"><button class="primary" data-go="skills">Edit my skills</button></div></div>`;
@@ -255,6 +256,48 @@
     });
     if (!active.missing_skills.length) lines.push("No listed benchmark gaps.");
     return lines.join("\n");
+  }
+  function printPlanHTML() {
+    const active = activeRole();
+    if (!active) return "";
+    return FuturePathPrint.html({
+      role: active.role, name: state.name, degree: state.degree,
+      match: active.match_pct.toFixed(1), weeks: state.weeks,
+      date: new Date().toLocaleDateString(undefined, {year: "numeric", month: "short", day: "numeric"}),
+      preference: state.budget === "free" ? "Free only" : "Free + low-cost",
+      includePaid: state.budget === "lowcost",
+      skills: allSkills().filter(skill => state.skills.has(skill.toLowerCase())),
+      gaps: active.missing_skills.map((skill, index, gaps) => {
+        const paid = DATA.lowCost[skill];
+        return {
+          skill, when: weekRange(index, gaps.length),
+          complete: Boolean(state.completed[active.role + "|" + skill]),
+          free: DATA.resources[skill],
+          paid: paid ? {...paid, priceNote: `${Number(paid.price).toFixed(2)} ${paid.currency} · checked ${paid.checked_on}. Confirm current price.`} : null,
+        };
+      }),
+    });
+  }
+  function openPrintablePlan() {
+    const html = printPlanHTML();
+    if (!html) return;
+    const popup = window.open("", "_blank");
+    if (!popup) {
+      toast("Allow pop-ups for this site, then select Save as PDF again.");
+      return;
+    }
+    try {
+      popup.document.open();
+      popup.document.write(html);
+      popup.document.close();
+      popup.opener = null;
+      popup.document.getElementById("print-plan").onclick = () => popup.print();
+      popup.focus();
+      popup.print();
+    } catch (error) {
+      console.error("Could not open print preview", error);
+      toast("Print preview could not open. Please try again in a browser that supports printing.");
+    }
   }
   function escapeICS(text) { return String(text).replace(/\\/g, "\\\\").replace(/\r\n|\r|\n/g, "\\n").replace(/,/g, "\\,").replace(/;/g, "\\;"); }
   function calendarText() {
@@ -339,6 +382,8 @@
       }
       document.querySelectorAll("[data-complete]").forEach(input => input.onchange = () => { state.completed[input.dataset.complete] = input.checked; });
       const md = $("#btn-export-reskill-md");
+      const pdf = $("#btn-export-reskill-pdf");
+      if (pdf) pdf.onclick = openPrintablePlan;
       if (md) md.onclick = () => { publish(); download("futurepath-study-plan.md", "text/markdown;charset=utf-8", planText()); };
       const ics = $("#btn-sync-cal-reskill");
       if (ics) ics.onclick = () => { publish(); download("futurepath-study-plan.ics", "text/calendar;charset=utf-8", calendarText()); };

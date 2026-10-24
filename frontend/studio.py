@@ -21,7 +21,10 @@ def build_studio_html(data: dict) -> str:
     )
     source = source.replace(
         "/* STUDIO_SCRIPT */",
-        source_path.with_name("journey.js").read_text(encoding="utf-8"),
+        "\n".join(
+            source_path.with_name(name).read_text(encoding="utf-8")
+            for name in ("plan_print.js", "journey.js")
+        ),
     )
     payload = json.dumps(data, ensure_ascii=True, separators=(",", ":"))
     payload = (payload.replace("<", "\\u003c").replace(">", "\\u003e")
